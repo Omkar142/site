@@ -1,0 +1,12 @@
+{
+  "google-wordmark.svg": {
+    "source": "https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg",
+    "sha256": "99bf4aa403643a6d41c028e5db29c79c17cbc815b3e10cd5c6b8f90567a03e52",
+    "use": "Accurate prior-experience label; logo bytes unmodified"
+  },
+  "tracxn-wordmark.svg": {
+    "source": "https://cdn.tracxn.com/images/static/tracxn-logo-full-100x22.svg",
+    "sha256": "be9a939ad62098b7fca1be989ebdc2ed97d44fdd5bb7b154b4a844c5ba745f9f",
+    "use": "Accurate prior-experience label; logo bytes unmodified"
+  }
+}

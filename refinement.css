@@ -1,0 +1,1241 @@
+/* Corrections grounded in the user's October 11 phone recording. */
+.hero h1 .wordmark-dot {
+  display: none;
+}
+.hero-grid {
+  min-height: clamp(680px, 85svh, 900px);
+  max-height: none;
+}
+.hero-figure {
+  height: 76%;
+  top: 21%;
+}
+.hero-description {
+  font-size: 15px;
+}
+.hero-location {
+  font-size: 12px;
+}
+.signature small {
+  font-size: 11px;
+}
+.experience-strip {
+  gap: 28px;
+}
+.experience-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+  min-width: 118px;
+}
+.experience-brand .brand-wordmark {
+  width: auto;
+  height: 27px;
+  max-width: 146px;
+  object-fit: contain;
+  display: block;
+}
+.brand-google .google-lockup {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.brand-google .play-label {
+  font:
+    500 23px/1 Space,
+    sans-serif;
+  color: #d7e2ea;
+  letter-spacing: -0.035em;
+}
+.brand-tracxn .brand-wordmark {
+  height: 24px;
+  width: auto;
+}
+.brand-tracxn .brand-plate {
+  padding: 8px 13px;
+  background: #fff;
+  border-radius: 8px;
+  display: inline-flex;
+}
+.experience-brand > .brand-description {
+  font:
+    10px/1.5 Code,
+    monospace;
+  letter-spacing: 0;
+  color: #abb7c0;
+}
+.brand-cisco .cisco-lockup {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.brand-cisco .cisco-lockup > span {
+  font:
+    600 23px/1 Space,
+    sans-serif;
+  letter-spacing: -0.035em;
+}
+.brand-cisco .cisco-bridge {
+  width: 46px;
+  height: 30px;
+}
+.js-motion .film-chapter {
+  min-height: min(150svh, 1300px);
+}
+.js-motion .film-sticky {
+  top: 88px;
+  min-height: min(calc(100svh - 88px), 820px);
+}
+.film-copy h2 {
+  font-size: clamp(3rem, 6vw, 6rem);
+}
+.film-copy p:not(.chapter-label) {
+  font-size: 16px;
+  line-height: 1.75;
+}
+.film-layout {
+  gap: 48px;
+}
+.film-scene {
+  height: 480px;
+  min-height: 0;
+}
+.film-floor {
+  opacity: 0.18;
+}
+.story-motion .approach-step,
+.story-motion .approach-step:last-child {
+  min-height: 0;
+}
+.approach-story {
+  gap: 48px;
+  margin-top: 40px;
+  grid-template-columns: 1fr 1.1fr;
+}
+.approach-flow {
+  gap: 18px;
+}
+.approach-step {
+  padding: 28px;
+  margin: 0;
+}
+.approach-step h3 {
+  margin-top: 12px;
+  font-size: 26px;
+}
+.approach-step p {
+  max-width: none;
+  margin-top: 14px;
+  font-size: 15px;
+}
+.scene-hint {
+  display: none !important;
+}
+.contact-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 48px;
+  align-items: center;
+  min-height: 0;
+}
+.contact-copy {
+  min-width: 0;
+}
+.contact h2 {
+  font-size: clamp(3.2rem, 6vw, 6.8rem);
+  max-width: none;
+}
+.contact-info {
+  position: static;
+  max-width: none;
+  margin-top: 25px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.contact-info span {
+  display: block;
+  margin: 0;
+}
+.contact-character {
+  position: relative;
+  width: 340px;
+  height: 360px;
+  right: auto;
+  bottom: auto;
+}
+.contact-actions {
+  margin-top: 28px;
+  max-width: none;
+}
+.contact .chapter-label {
+  margin-bottom: 24px;
+}
+.js-motion .contact h2 {
+  transform: none;
+}
+.case-study {
+  opacity: 1 !important;
+}
+.case-study .case-company {
+  font-size: 12px;
+}
+.case-study .case-intro {
+  font-size: 16px;
+}
+.case-study .case-details summary {
+  font-size: 14px;
+  min-height: 48px;
+}
+.project-choices {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.project-explorer {
+  display: block !important;
+}
+.case-company .company-square {
+  display: none;
+}
+
+/* A rem-based reading scale works in a normal phone viewport and in the
+   wide, tall touch viewport visible in the recording. Tablets keep 16px. */
+html.compact {
+  font-size: 16px;
+}
+html.handheld-wide {
+  font-size: 4.2vw;
+}
+.compact body {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.compact .container {
+  width: calc(100% - 2.5rem);
+}
+.compact .nav {
+  min-height: 4rem;
+  gap: 0.75rem;
+}
+.compact .brand {
+  gap: 0.6rem;
+}
+.compact .monogram {
+  font-size: 1.45rem;
+  letter-spacing: -0.09em;
+}
+.compact .brand-name {
+  display: none;
+}
+.compact .nav-cta {
+  display: inline-flex;
+  padding: 0.55rem 1rem;
+  font-size: 0.75rem;
+  min-height: 2.65rem;
+}
+.compact .menu-button {
+  display: block;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.7rem;
+  min-height: 2.65rem;
+}
+.compact .nav-links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.25rem;
+  background: #0c0c0c;
+  border-block: 1px solid #35383e;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.compact .nav-links.open {
+  display: flex;
+}
+.compact .nav-links a {
+  font-size: 0.7rem;
+  min-height: 2.7rem;
+}
+.compact .hero {
+  padding: 0;
+}
+.compact .hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  max-height: none;
+  padding-block: 1.5rem 1.25rem;
+}
+.compact .hero .role-label {
+  position: static;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  order: 0;
+  max-width: none;
+}
+.compact .hero h1.hero-wordmark {
+  position: static;
+  width: 100%;
+  font-size: 25vw;
+  margin-top: 1.5rem;
+  line-height: 0.86;
+  order: 1;
+  letter-spacing: -0.085em;
+  transform: none !important;
+  opacity: 1 !important;
+}
+.compact .hero-figure {
+  position: relative;
+  width: 100%;
+  height: 20rem;
+  inset: auto;
+  margin: 0.5rem 0 0;
+  order: 2;
+}
+.compact .hero-copy {
+  position: static;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  order: 3;
+  margin-top: 0.5rem;
+}
+.compact .hero-statement {
+  font-size: 1.75rem;
+}
+.compact .hero-description {
+  font-size: 0.95rem;
+  max-width: 34rem;
+  margin-top: 0.8rem;
+  line-height: 1.75;
+}
+.compact .hero-actions {
+  position: static;
+  width: 100%;
+  margin-top: 1.25rem;
+  gap: 1.25rem;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+.compact .hero-actions .button {
+  min-height: 3rem;
+  width: auto;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.8rem;
+  gap: 1.5rem;
+}
+.compact .hero-actions .text-link {
+  font-size: 0.8rem;
+  min-height: 2.7rem;
+}
+.compact .hero-motion-control {
+  position: static;
+  order: 4;
+  align-self: end;
+  margin-top: 1rem;
+}
+.compact .hero .motion-button {
+  font-size: 0.65rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.8rem;
+}
+.compact .hero-location,
+.compact .hero-scroll {
+  display: none;
+}
+.compact .hero-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-block: 1.25rem;
+  gap: 1.5rem;
+}
+.compact .signature {
+  font-size: 1rem;
+}
+.compact .signature small {
+  font-size: 0.65rem;
+  margin-top: 0.2rem;
+}
+.compact .experience-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  max-width: none;
+  gap: 0.75rem;
+}
+.compact .experience-brand {
+  min-width: 0;
+  gap: 0.6rem;
+}
+.compact .experience-brand .brand-wordmark {
+  height: 1.35rem;
+  width: auto;
+  max-width: 5.5rem;
+}
+.compact .brand-google .google-lockup {
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+.compact .brand-google .play-label {
+  font-size: 0.85rem;
+}
+.compact .brand-tracxn .brand-plate {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.35rem;
+}
+.compact .brand-tracxn .brand-wordmark {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+.compact .brand-cisco .cisco-lockup {
+  gap: 0.3rem;
+}
+.compact .brand-cisco .cisco-bridge {
+  width: 2.3rem;
+  height: 1.6rem;
+}
+.compact .brand-cisco .cisco-lockup > span {
+  font-size: 1rem;
+}
+.compact .experience-brand > .brand-description {
+  font-size: 0.55rem;
+  line-height: 1.7;
+}
+.compact .profile-lab {
+  padding-block: 3.5rem;
+}
+.compact .profile-grid {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+.compact .profile-lab .chapter-label,
+.compact .chapter-label,
+.compact .approach-kicker {
+  font-size: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+.compact .profile-lab h2 {
+  font-size: 2.65rem;
+}
+.compact .profile-lab h2 em {
+  font-size: 1em;
+}
+.compact .profile-lab .about-copy p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-top: 1rem;
+  max-width: none;
+}
+.compact .about-links {
+  margin-top: 1.25rem;
+  gap: 1.5rem;
+}
+.compact .about-links .text-link {
+  font-size: 0.8rem;
+  min-height: 2.75rem;
+}
+.compact .profile-lab .editor {
+  max-width: none;
+  width: 100%;
+  border-radius: 1.25rem;
+}
+.compact .profile-lab .editor-top {
+  padding: 1rem;
+  gap: 0.6rem;
+}
+.compact .profile-lab .editor-top > span:nth-child(2) {
+  font-size: 0.7rem;
+}
+.compact .profile-lab .editor-top > span:last-child {
+  display: none;
+}
+.compact .editor-lights {
+  gap: 0.3rem;
+}
+.compact .editor-lights i {
+  width: 0.35rem;
+  height: 0.35rem;
+}
+.compact .profile-lab .code-modes {
+  padding: 0.65rem 0.65rem 0;
+  gap: 0.3rem;
+}
+.compact .profile-lab .code-modes button {
+  font-size: 0.65rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.7rem;
+}
+.compact .profile-lab .code-shell {
+  min-height: 17rem;
+  padding: 1rem;
+  background-size: 100% 1.65rem;
+}
+.compact .profile-lab .code-shell pre {
+  font-size: 0.68rem;
+  line-height: 2;
+}
+.compact .line-no {
+  width: 1.2rem;
+}
+.compact .profile-lab .editor-footer {
+  min-height: 4rem;
+  padding: 0.75rem 1rem;
+  gap: 0.8rem;
+  font-size: 0.6rem;
+}
+.compact .replay {
+  font-size: 0.65rem;
+  min-height: 2.7rem;
+}
+.compact .work-marquee {
+  padding: 0 0 2.5rem;
+}
+.compact .marquee-label {
+  font-size: 0.55rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.compact .marquee-row {
+  gap: 0.75rem;
+  padding-block: 0.35rem;
+}
+.compact .marquee-tile {
+  width: 16rem;
+  height: 10rem;
+  border-radius: 1rem;
+}
+.compact .marquee-tile > span {
+  font-size: 0.6rem;
+  left: 1rem;
+  bottom: 0.75rem;
+}
+.compact .film-chapter,
+.compact.js-motion .film-chapter {
+  min-height: 0 !important;
+}
+.compact .film-sticky,
+.compact.js-motion .film-sticky {
+  position: relative;
+  top: 0;
+  min-height: 0;
+  padding-block: 3rem 2.25rem;
+}
+.compact .film-layout {
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+.compact .film-copy {
+  max-width: none;
+}
+.compact .film-copy h2 {
+  font-size: 3.2rem;
+  line-height: 0.98;
+}
+.compact .film-copy p:not(.chapter-label),
+.compact .film-copy [data-scroll-text] {
+  font-size: 0.95rem !important;
+  line-height: 1.8;
+  margin-top: 1.25rem;
+  max-width: none;
+}
+.compact .film-copy .text-link {
+  font-size: 0.8rem;
+  margin-top: 1.25rem;
+}
+.compact .film-scene {
+  width: 100%;
+  max-width: none;
+  height: 20rem;
+  min-height: 0;
+}
+.compact .film-caption {
+  font-size: 0.7rem;
+  padding: 0.75rem;
+}
+.compact .film-index {
+  font-size: 0.65rem;
+}
+.compact .film-rail {
+  margin-top: 1.5rem;
+  font-size: 0.58rem;
+  padding-top: 1rem;
+}
+.compact .impact {
+  padding: 3rem 0 2rem;
+  border-radius: 2rem 2rem 0 0;
+}
+.compact .impact-head {
+  display: block;
+}
+.compact .impact-head h2 {
+  font-size: 2.8rem;
+  margin-top: 1.5rem;
+}
+.compact .impact-head > p:last-child {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  max-width: none;
+}
+.compact .impact-metrics {
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.compact .metric-number {
+  font-size: 5.4rem;
+}
+.compact .metric-caption {
+  font-size: 0.7rem;
+  margin-top: 0.75rem;
+}
+.compact .impact-source {
+  font-size: 0.65rem;
+  margin-top: 1.5rem;
+}
+.compact .kinetic-strip {
+  padding-block: 1rem;
+}
+.compact .kinetic-track {
+  font-size: 1.5rem;
+}
+.compact .capabilities {
+  padding-block: 3.5rem 5rem;
+  border-radius: 2rem 2rem 0 0;
+}
+.compact .capabilities-head {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.compact .capabilities h2 {
+  font-size: 3rem;
+}
+.compact .capabilities-head > p {
+  font-size: 0.95rem;
+  max-width: none;
+}
+.compact .capability {
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  align-items: start;
+}
+.compact .capability-number {
+  font-size: 3rem;
+}
+.compact .capability h3 {
+  font-size: 1.3rem;
+}
+.compact .capability p {
+  font-size: 0.9rem;
+  margin-top: 0.7rem;
+  max-width: none;
+}
+.compact .capability > .arrow {
+  display: none;
+}
+.compact #work {
+  padding: 3.5rem 1.25rem 2.5rem;
+  margin-top: -2rem;
+  border-radius: 2rem 2rem 0 0;
+}
+.compact #work .section-head {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.compact #work .section-head h2 {
+  font-size: 3.5rem;
+}
+.compact #work .section-head > p:last-child {
+  font-size: 0.95rem;
+  max-width: none;
+}
+.compact .project-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.compact .project-choice {
+  display: block;
+  min-height: 4.5rem;
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.5rem;
+}
+.compact .project-choice .choice-index {
+  display: block;
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.compact .project-choice .choice-name {
+  font-size: 0.8rem;
+}
+.compact .project-choice small,
+.compact .project-choice .choice-arrow {
+  display: none;
+}
+.compact .case-study,
+.compact .stack-ready .case-study {
+  position: relative;
+  top: 0;
+  transform: none;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.compact .case-study:last-child {
+  margin-bottom: 0;
+}
+.compact .case-header {
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.compact .case-number {
+  font-size: 3rem;
+}
+.compact .case-study .case-company {
+  font-size: 0.65rem;
+}
+.compact .case-cover {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+.compact .case-title {
+  font-size: 2.55rem;
+}
+.compact .case-study .case-intro {
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+.compact .case-art {
+  height: 14rem;
+  border-radius: 1rem;
+}
+.compact .case-art small {
+  font-size: 0.5rem;
+  left: 0.75rem;
+  bottom: 0.75rem;
+}
+.compact .case-details {
+  margin-top: 1.5rem;
+}
+.compact .case-study .case-details summary {
+  font-size: 0.85rem;
+  min-height: 3rem;
+  padding-top: 1rem;
+}
+.compact .case-details .case-columns {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-block: 1.5rem;
+  padding-top: 1.5rem;
+}
+.compact .case-columns h4 {
+  font-size: 0.7rem;
+}
+.compact .case-columns p,
+.compact .case-details .detail-content {
+  font-size: 0.9rem;
+}
+.compact .case-flow,
+.compact .architecture,
+.compact .validation-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-block: 1.5rem;
+}
+.compact .flow-step,
+.compact .architecture > div,
+.compact .validation-flow > div {
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+.compact .flow-step b,
+.compact .architecture b,
+.compact .validation-flow b {
+  font-size: 1rem;
+}
+.compact .flow-step p,
+.compact .architecture small,
+.compact .validation-flow small {
+  font-size: 0.8rem;
+}
+.compact .architecture span,
+.compact .validation-flow span {
+  font-size: 0.65rem;
+}
+.compact .validation-flow > i {
+  display: none;
+}
+.compact .technical-points {
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.compact .technical-points span {
+  font-size: 0.7rem;
+  padding: 0.4rem 0.6rem;
+}
+.compact .case-caption {
+  font-size: 0.65rem;
+}
+.compact .approach {
+  padding-block: 3.5rem;
+  border-radius: 2rem 2rem 0 0;
+}
+.compact .approach-heading {
+  font-size: 2.8rem;
+}
+.compact .approach-story {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.compact .approach-visual,
+.compact .story-motion .approach-visual {
+  position: static;
+  max-width: none;
+  width: 100%;
+}
+.compact .system-scene {
+  height: 17rem;
+  aspect-ratio: auto;
+}
+.compact .scene-caption {
+  gap: 1rem;
+  padding-top: 1rem;
+}
+.compact .scene-count {
+  font-size: 0.65rem;
+}
+.compact .scene-label {
+  font-size: 1.6rem;
+}
+.compact .story-track {
+  margin-top: 1rem;
+}
+.compact .approach-flow {
+  gap: 1rem;
+}
+.compact .approach-step,
+.compact .story-motion .approach-step,
+.compact .story-motion .approach-step:last-child {
+  min-height: 0;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+.compact .step-number {
+  font-size: 0.65rem;
+}
+.compact .approach-step h3 {
+  font-size: 1.5rem;
+  margin-top: 0.7rem;
+}
+.compact .approach-step p {
+  font-size: 0.95rem;
+  max-width: none;
+  margin-top: 1rem;
+}
+.compact .about {
+  padding-block: 3.5rem;
+}
+.compact .experience-head {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+.compact .experience-head h2 {
+  font-size: 2.8rem;
+}
+.compact .experience-head > p:last-child {
+  font-size: 0.95rem;
+  max-width: none;
+}
+.compact .timeline {
+  margin-top: 2rem;
+}
+.compact .timeline-item {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding: 1.5rem 0 1.5rem 1.5rem;
+}
+.compact .timeline-item::before {
+  width: 0.4rem;
+  height: 0.4rem;
+  top: 2rem;
+  left: -0.2rem;
+}
+.compact .timeline-item .date {
+  grid-column: auto;
+  font-size: 0.65rem;
+  margin: 0;
+}
+.compact .timeline-item h3 {
+  grid-column: auto;
+  font-size: 1.6rem;
+}
+.compact .timeline-item .job {
+  grid-column: auto;
+  font-size: 0.9rem;
+  max-width: none;
+  margin: 0;
+}
+.compact .timeline-item .job-description {
+  grid-column: auto;
+  font-size: 0.85rem;
+  max-width: none;
+  margin: 0;
+}
+.compact .about-footer {
+  gap: 1rem;
+  font-size: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+}
+.compact .print-button {
+  font-size: 0.7rem;
+  min-height: 2.7rem;
+}
+.compact .contact {
+  padding: 3.5rem 1.25rem 2rem;
+}
+.compact .contact-top {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+.compact .contact .chapter-label {
+  margin-bottom: 1.5rem;
+}
+.compact .contact h2 {
+  font-size: 3rem;
+}
+.compact .contact-info {
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
+}
+.compact .contact-character {
+  width: min(100%, 22rem);
+  height: 20rem;
+  margin-inline: auto;
+}
+.compact .contact-actions {
+  margin-top: 1rem;
+  gap: 1rem;
+}
+.compact .contact-actions .button {
+  font-size: 0.85rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.2rem;
+}
+.compact .copy-button {
+  font-size: 0.8rem;
+  min-height: 2.75rem;
+}
+.compact .copy-status {
+  font-size: 0.7rem;
+}
+.compact .footer {
+  padding-block: 1rem;
+  gap: 1rem;
+  font-size: 0.7rem;
+}
+.compact .footer-links {
+  gap: 0.9rem;
+}
+.compact .footer a {
+  min-height: 2.7rem;
+}
+@media print {
+  html.compact,
+  html.handheld-wide {
+    font-size: 12px;
+  }
+  .contact-top {
+    display: block;
+  }
+  .contact-character {
+    display: none;
+  }
+  .story-motion .approach-step {
+    min-height: 0;
+  }
+}
+
+/* Evidence-first finish: four public work stories and clear recruiter actions. */
+.project-choices {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.impact-metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.metric-context {
+  font:
+    11px/1.6 Code,
+    monospace;
+  margin-top: 14px;
+  color: #30313a;
+}
+.impact .metric-number {
+  font-size: clamp(5rem, 10vw, 10rem);
+}
+.impact .metric-caption {
+  font-size: 12px;
+}
+.case-header {
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.case-company img {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+.case-live-link {
+  margin-left: auto;
+  font:
+    12px/1.5 Space,
+    sans-serif;
+  padding: 12px 16px;
+  border: 1px solid #647082;
+  border-radius: 100px;
+  color: #d7e2ea;
+  min-height: 44px;
+}
+.screengod-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 80%, #33456a55, #0c0c0c 75%);
+}
+.screengod-art > img {
+  width: auto;
+  height: min(300px, 100%);
+  max-width: 100%;
+  border-radius: 14px;
+  transform: rotate(5deg);
+  object-fit: contain;
+  box-shadow: 0 16px 30px #0007;
+}
+.screengod-art small {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  background: #0c0c0cf0;
+  padding: 6px 10px;
+  color: #abb7c0;
+}
+.case-screengod .technical-points {
+  margin-top: 24px;
+}
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+.contact-actions .button-secondary {
+  background: transparent;
+  border: 1px solid #647082;
+  box-shadow: none;
+  color: #d7e2ea;
+}
+.contact-actions .button-secondary:hover {
+  background: #1b2231;
+}
+.contact-note {
+  color: #abb7c0;
+  font-size: 12px;
+  margin-top: 20px;
+  overflow-wrap: anywhere;
+}
+.contact-note a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.hero-figure {
+  animation: none;
+}
+.hero-figure::before {
+  background: radial-gradient(ellipse, #455c8f25, transparent 68%);
+}
+.hero .orbit-ring {
+  display: none;
+}
+.js-motion .hero .role-label {
+  animation: premium-rise 0.8s 0.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.js-motion .hero h1.hero-wordmark {
+  animation: wordmark-unveil 1.1s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.js-motion .hero-statement {
+  animation: premium-rise 0.9s 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.js-motion .hero-description {
+  animation: premium-rise 0.9s 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.js-motion .hero-actions {
+  animation: premium-rise 0.9s 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.js-motion .hero-figure.rig-ready #hero-canvas {
+  animation: portrait-unveil 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes premium-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes wordmark-unveil {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes portrait-unveil {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Preserve the light chapter as practical delivery methods, replacing the
+   repeated capability manifesto. The system illustration retains its dark stage. */
+.approach {
+  background: #f5f6f5;
+  color: #0c0c0c;
+  border-radius: 48px 48px 0 0;
+}
+.approach-heading,
+.approach-heading em,
+.approach-step h3 {
+  color: #0c0c0c;
+  -webkit-text-fill-color: #0c0c0c;
+}
+.approach-kicker,
+.approach-step p {
+  color: #4f5761;
+}
+.approach-step {
+  background: transparent;
+  border-color: #c3c8d0;
+}
+.approach-step.is-current {
+  background: #fff;
+  border-color: #8c98ac;
+}
+.approach-step .step-number {
+  color: #3048ec;
+}
+.approach .scene-label,
+.approach .scene-count {
+  color: #30313a;
+}
+.compact .project-choices {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.compact .impact-metrics {
+  grid-template-columns: 1fr;
+}
+.compact .impact .metric-number {
+  font-size: 5.4rem;
+}
+.compact .impact .metric-caption {
+  font-size: 0.85rem;
+}
+.compact .metric-context {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+.compact .case-header {
+  gap: 0.75rem;
+}
+.compact .case-live-link {
+  margin-left: 0;
+  font-size: 0.8rem;
+  padding: 0.65rem 1rem;
+  min-height: 2.75rem;
+}
+.compact .case-company img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.6rem;
+}
+.compact .screengod-art > img {
+  height: 14rem;
+}
+.compact .case-screengod .technical-points {
+  margin-top: 1rem;
+}
+.compact .contact-actions {
+  align-items: stretch;
+  gap: 0.75rem;
+}
+.compact .contact-actions .button {
+  width: 100%;
+  justify-content: space-between;
+}
+.compact .contact-actions .text-link {
+  font-size: 0.85rem;
+  min-height: 2.75rem;
+}
+.compact .contact-note {
+  font-size: 0.75rem;
+  margin-top: 1rem;
+}
+.compact .approach {
+  border-radius: 2rem 2rem 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero *,
+  .hero *::before,
+  .hero *::after {
+    animation: none !important;
+  }
+}
+.motion-off .hero * {
+  animation: none !important;
+}
+.approach .system-scene {
+  background: radial-gradient(ellipse, #27377366, transparent 68%), #111b30;
+  border-radius: 22px;
+}
+#work {
+  margin-top: 0;
+}
+.compact #work {
+  margin-top: 0;
+}
+.case-study:first-child {
+  --stack-scale: 0.09;
+}
+.case-study:nth-child(2) {
+  --stack-scale: 0.06;
+}
+.case-study:nth-child(3) {
+  --stack-scale: 0.03;
+  margin-bottom: 32px;
+}
+.case-study:nth-child(4) {
+  --stack-scale: 0;
+  background: #151b29;
+  border-color: #647082;
+}
+.case-study:last-child {
+  margin-bottom: 0;
+}
+.stack-ready .case-study:nth-child(4) {
+  top: 184px;
+}

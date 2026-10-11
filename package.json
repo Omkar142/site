@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "three": "^0.186.1"
+  },
+  "name": "omkar-character-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:scene": "esbuild src/signal-core.js --bundle --minify --format=iife --target=es2020 --outfile=signal-core.js",
+    "test": "node tests/scroll-story.cjs && node tests/cinematic.cjs && node tests/pilot-rig.mjs && node tests/counters.cjs && node tests/continuity.cjs && node tests/projects.cjs && node tests/creator.cjs && node tests/layout.cjs && node tests/hero-film.cjs && node tests/hero-sequence.cjs && node tests/entrance-codepad.cjs && node tests/section-mascots.cjs"
+  }
+}

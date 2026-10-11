@@ -1,0 +1,12 @@
+{
+  "screengod-icon.webp": {
+    "source": "https://play-lh.googleusercontent.com/C8gP7h0nA6-kXPlS342tJUUcZujogkv0iuX-Q30xX4sDtcOT542tlmyPQ0lRDpTxJlDJVTmLEfIfHMav0oq5LCY=w240-h480",
+    "listing": "https://play.google.com/store/apps/details?id=com.contextmaster",
+    "use": "Published app icon; converted to local WebP"
+  },
+  "screengod-product.webp": {
+    "source": "https://play-lh.googleusercontent.com/5nZv7mtK9SMqAqi2Kaza6aaRnW31M59c6MAlFdOg6WNcth9ER5P-l5R57wp1x_qxvDj4LEyGpgwFXUM6w8zv=w480-h960",
+    "listing": "https://play.google.com/store/apps/details?id=com.contextmaster",
+    "use": "Actual published product screenshot; converted to local WebP"
+  }
+}

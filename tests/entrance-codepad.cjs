@@ -1,0 +1,25 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const entrance=fs.readFileSync(path.join(__dirname,'../initialization.js'),'utf8');
+function setup({hash='',reduced=false,seen=false,off=false,saveData=false}={}) {
+ const classes=new Set(),timers=new Map(),events={},docs={};let key=0,writes=0;
+ const context={document:{documentElement:{classList:{add:(...ks)=>ks.forEach(k=>classes.add(k)),remove:(...ks)=>ks.forEach(k=>classes.delete(k))}},addEventListener:(k,f)=>docs[k]=f},
+ window:{addEventListener:(k,f)=>events[k]=f,removeEventListener:k=>delete events[k]},location:{hash},navigator:{connection:{saveData}},matchMedia:()=>({matches:reduced,addEventListener(){}}),
+ sessionStorage:{getItem:()=>seen?'yes':null,setItem(){writes++;}},localStorage:{getItem:()=>off?'off':null},setTimeout(f,ms){timers.set(++key,{f,ms});return key;},clearTimeout:k=>timers.delete(k)};
+ vm.runInNewContext(entrance,context);return{classes,timers,events,docs,writes:()=>writes};
+}
+const normal=setup();assert.ok(normal.classes.has('is-initializing'));assert.equal([...normal.timers.values()][0].ms,2900,'Slow document has a bounded splash');normal.docs.DOMContentLoaded();assert.ok(normal.classes.has('is-painting'));const [paintKey,paint]=[...normal.timers].find(([,v])=>v.ms===1100);normal.timers.delete(paintKey);paint.f();assert.ok(!normal.classes.has('is-painting'),'Paint finishes before the approved name splash');const [holdKey,hold]=[...normal.timers].find(([,v])=>v.ms===900);normal.timers.delete(holdKey);hold.f();assert.ok(normal.classes.has('splash-exiting'),'Document-ready hold opens the curtains');assert.equal([...normal.timers.values()].find(v=>v.ms===550).ms,550);normal.events.keydown();assert.ok(!normal.classes.has('is-initializing'));assert.ok(!normal.classes.has('is-painting'));assert.ok(!normal.classes.has('splash-exiting'));assert.equal(normal.timers.size,0);assert.equal(normal.writes(),1,'Interaction skips and remembers splash');
+const fallback=setup();const [guardKey,guard]=[...fallback.timers][0];fallback.timers.delete(guardKey);guard.f();fallback.docs.DOMContentLoaded();assert.equal(fallback.timers.size,0,'Late document readiness cannot restart completed splash');
+for(const opts of [{hash:'#case-tracxn'},{reduced:true},{seen:true},{off:true},{saveData:true}]){const d=setup(opts);assert.equal(d.classes.size,0);assert.equal(d.timers.size,0,'Deep links, repeat visits and motion preferences never wait');}
+const source=fs.readFileSync(path.join(__dirname,'../portfolio.js'),'utf8');const start=source.indexOf('  function type()'),end=source.indexOf('  function applyMotion()',start);
+const renders=[],tasks=[];let clock=0,off=false;
+const context={timer:0,generation:0,mode:'engineering',profiles:{engineering:{text:'const omkar = {\n  role: "TPM"\n};',status:'Ready'}},codeStatus:{},motionOff:()=>off,render:(text,cursor)=>renders.push({text,cursor,clock}),clearTimeout(){},setTimeout(f,ms){tasks.push({f,ms});return tasks.length;}};
+vm.createContext(context);vm.runInContext(source.slice(start,end),context);context.type();while(tasks.length){const job=tasks.shift();clock+=job.ms;job.f();}
+assert.equal(renders.at(-1).text,context.profiles.engineering.text);assert.ok(clock>1000,'Profile is readably paced');assert.ok(renders.some((r,i)=>i&&r.clock-renders[i-1].clock===160),'New lines have a deliberate pause');assert.ok(renders.every((r,i)=>!i||r.text.length-renders[i-1].text.length===1),'Typing adds one character at a time');
+off=true;const before=renders.length;context.type();assert.equal(renders.length,before+1);assert.equal(tasks.length,0,'Motion off renders the full profile immediately');
+console.log('PASS: brief bounded session entrance, immediate dismissal, deep-link/reduced/data-saver bypass, readable typing rhythm and static profile');
+
+const motionStart=source.indexOf('  function applyMotion()'),motionEnd=source.indexOf('  motion.hidden = false',motionStart);
+const attrs={},button={setAttribute(k,v){attrs[k]=v;}},preference={matches:false};let paused=false;
+const motionContext={root:{classList:{toggle(){}}},motion:button,reduced:preference,motionOff:()=>paused||preference.matches,document:{querySelectorAll:()=>[],querySelector:()=>({style:{}})},clearTimeout(){},timer:0,generation:0,profiles:{engineering:{text:'Profile'}},mode:'engineering',render(){},refreshScrollStory(){}};
+vm.createContext(motionContext);vm.runInContext(source.slice(motionStart,motionEnd),motionContext);motionContext.applyMotion();assert.equal(attrs['aria-checked'],'true');assert.ok(button.innerHTML.includes('>On</span>'));assert.equal(button.title,'Pause animations');paused=true;motionContext.applyMotion();assert.equal(attrs['aria-checked'],'false');assert.ok(button.innerHTML.includes('>Off</span>'));assert.equal(button.title,'Enable animations');preference.matches=true;motionContext.applyMotion();assert.equal(button.disabled,true);assert.ok(button.innerHTML.includes('>Reduced</span>'));
+console.log('PASS: animation switch uses checked=enabled, clear On/Off status and device-controlled reduced state');

@@ -1,1996 +1,1811 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <a href="#home" class="logo">OG</a>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omkar Gochhayat - Strategic Project Leader</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <style>
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-card: #1a1a1a;
-            --accent-primary: #00ff88;
-            --accent-secondary: #ff0080;
-            --accent-tertiary: #0080ff;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #666666;
-            --border: #333333;
-            --gradient-primary: linear-gradient(135deg, #ffff);
-            --gradient-card: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%);
-            --blur: blur(20px);
-            --shadow-glow: 0 0 50px rgba(0, 255, 136, 0.3);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        ::selection {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--accent-primary);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
-            opacity: 0.5;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
-            position: absolute;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 20s infinite linear;
-        }
-
-        .shape:nth-child(1) { width: 100px; height: 100px; left: 10%; animation-delay: 0s; }
-        .shape:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-delay: -5s; }
-        .shape:nth-child(3) { width: 80px; height: 80px; left: 60%; animation-delay: -10s; }
-        .shape:nth-child(4) { width: 120px; height: 120px; left: 80%; animation-delay: -15s; }
-        .shape:nth-child(5) { width: 40px; height: 40px; left: 40%; animation-delay: -7s; }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-
-        .nav-toggle {
-            width: 50px;
-            height: 50px;
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: var(--blur);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-            font-size: 18px;
-        }
-
-        .nav-toggle:hover {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            box-shadow: var(--shadow-glow);
-            transform: scale(1.1);
-        }
-.logo {
-    position: fixed;
-    top: 30px;
-    left: 30px;
-    z-index: 1000;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-}
-        .nav-menu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: var(--blur);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .nav-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .nav-links {
-            list-style: none;
-            text-align: center;
-        }
-
-        .nav-links li {
-            margin: 30px 0;
-            overflow: hidden;
-        }
-
-        .nav-links a {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-decoration: none;
-            display: inline-block;
-            transform: translateY(100%);
-            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            position: relative;
-        }
-
-        .nav-menu.active .nav-links a {
-            transform: translateY(0);
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            transition: width 0.5s ease;
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 1000px;
-            padding: 0 40px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--accent-primary);
-            border-radius: 50px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--accent-primary);
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .hero-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .hero-description {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 50px;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .btn {
-            position: relative;
-            padding: 15px 35px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-        }
-
-       
-        @keyframes fadeInBounce {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-
-        @keyframes scrollAnimation {
-            0%, 20% { transform: scaleY(1); }
-            50% { transform: scaleY(0.5); }
-            80%, 100% { transform: scaleY(1); }
-        }
-
-        /* Sections */
-        .section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .section-header {
-            margin-bottom: 80px;
-        }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            font-size: 20px;
-            color: var(--text-secondary);
-            max-width: 600px;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-visual {
-            position: relative;
-            aspect-ratio: 1;
-            background: var(--gradient-card);
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .code-simulation {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            background: var(--bg-primary);
-            border-radius: 10px;
-            padding: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            overflow: hidden;
-        }
-
-        .code-line {
-            margin: 8px 0;
-            opacity: 0;
-            animation: typeIn 0.5s ease forwards;
-        }
-
-        .code-line:nth-child(1) { animation-delay: 0.5s; color: var(--accent-tertiary); }
-        .code-line:nth-child(2) { animation-delay: 1s; color: var(--accent-primary); }
-        .code-line:nth-child(3) { animation-delay: 1.5s; color: var(--accent-secondary); }
-        .code-line:nth-child(4) { animation-delay: 2s; color: var(--text-secondary); }
-        .code-line:nth-child(5) { animation-delay: 2.5s; color: var(--accent-primary); }
-
-        @keyframes typeIn {
-            to { opacity: 1; }
-        }
-
-        .about-content h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .about-text {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 30px 20px;
-            background: var(--gradient-card);
-            border-radius: 15px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
-        }
-
-        .stat-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-
-        /* Experience Section */
-        .experience {
-            background: var(--bg-secondary);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--gradient-primary);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin: 60px 0;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 55%;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 55%;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 30px;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            border: 4px solid var(--bg-secondary);
-            z-index: 2;
-            box-shadow: 0 0 20px var(--accent-primary);
-        }
-
-        .timeline-content {
-            background: var(--gradient-card);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-card);
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .job-company {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--accent-primary);
-        }
-
-        .job-title {
-            font-size: 18px;
-            color: var(--text-primary);
-            margin: 5px 0;
-        }
-
-        .job-location {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .job-duration {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .achievement-section {
-            margin-bottom: 30px;
-        }
-
-        .achievement-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--accent-secondary);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .achievement-list {
-            list-style: none;
-        }
-
-        .achievement-list li {
-            position: relative;
-            padding-left: 20px;
-            margin: 12px 0;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .achievement-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
-
-        .highlight {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-category {
-            background: var(--gradient-card);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-card);
-        }
-
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .skill-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg-primary);
-            font-size: 24px;
-        }
-
-        .skill-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--accent-primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            transform: scale(1.05);
-        }
-
-        /* Certifications */
-        .certifications {
-            background: var(--bg-secondary);
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .cert-card {
-            background: var(--gradient-card);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cert-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-        }
-
-        .cert-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-card);
-        }
-
-        .cert-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            color: var(--bg-primary);
-            font-size: 32px;
-            position: relative;
-        }
-
-        .cert-icon::after {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-primary);
-            opacity: 0;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0; transform: scale(1.2); }
-        }
-
-        .cert-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .cert-issuer {
-            color: var(--text-muted);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--bg-primary);
-            position: relative;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .contact-card {
-            background: var(--gradient-card);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .contact-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-card);
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            color: var(--accent-primary);
-            margin-bottom: 25px;
-        }
-
-        .contact-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-        }
-
-        .contact-text {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .contact-link {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .contact-link:hover {
-            color: var(--accent-secondary);
-            text-shadow: 0 0 10px var(--accent-secondary);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                margin-left: 80px;
-                margin-right: 0;
-            }
-
-            .timeline-dot {
-                left: 30px;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            .nav {
-                top: 20px;
-                right: 20px;
-            }
-
-            .hero-content {
-                padding: 0 20px;
-            }
-
-            .section {
-                padding: 60px 0;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .cert-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links a {
-                font-size: 2rem;
-            }
-        }
-
-        /* Loading Screen */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
-        }
-
-        .loader-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--text-primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loader-text::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 2px;
-            background: var(--accent-primary);
-            animation: loading 2s ease infinite;
-        }
-
-        @keyframes loading {
-            0% { width: 0; }
-            50% { width: 100%; }
-            100% { width: 0; }
-        }
-
-        .loader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Glitch Effect */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            animation: glitch-1 0.5s infinite;
-            color: var(--accent-secondary);
-            z-index: -1;
-        }
-
-        .glitch::after {
-            animation: glitch-2 0.5s infinite;
-            color: var(--accent-tertiary);
-            z-index: -2;
-        }
-
-        @keyframes glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
-            15%, 49% { transform: translate(-2px, 1px); }
-        }
-
-        @keyframes glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
-            21%, 62% { transform: translate(2px, -1px); }
-        }
-    </style>
-</head>
-<body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-text">Initializing Portfolio...</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://www.omkarg.co.in/" />
+    <script src="layout.js?v=evidence-20261011"></script>
+    <script src="initialization.js?v=paint-strokes-20261011"></script>
+    <meta name="theme-color" content="#0c0c0c" />
+    <meta
+      name="description"
+      content="Omkar Gochhayat — Technical Program Manager. Google Play, Tracxn and Cisco experience, plus ScreenGod, a shipped AI-powered Android product. Explore delivery outcomes, case studies and résumé."
+    />
+    <meta
+      property="og:title"
+      content="Omkar Gochhayat | Engineering. Delivery. AI."
+    />
+    <meta
+      property="og:description"
+      content="Omkar Gochhayat — Technical Program Manager. Google Play, Tracxn and Cisco experience, plus ScreenGod, a shipped AI-powered Android product. Explore delivery outcomes, case studies and résumé."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://www.omkarg.co.in/"
+    />
+    <meta
+      property="og:image"
+      content="https://www.omkarg.co.in/assets/pilot-seated.webp"
+    />
+    <title>Omkar Gochhayat | Engineering. Delivery. AI.</title>
+    <link
+      rel="preload"
+      as="font"
+      href="assets/space-grotesk.woff2"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="portfolio.css?v=evidence-20261011" />
+    <link rel="stylesheet" href="cinematic.css?v=evidence-20261011" />
+    <link rel="stylesheet" href="continuity.css?v=evidence-20261011" />
+    <script src="portfolio.js?v=paint-strokes-20261011" defer></script>
+    <script src="cinematic.js?v=evidence-20261011" defer></script>
+    <script src="continuity.js?v=evidence-20261011" defer></script>
+    <link rel="stylesheet" href="creator.css?v=evidence-20261011" />
+    <link rel="stylesheet" href="refinement.css?v=evidence-20261011" />
+    <script src="signal-core.js?v=paint-strokes-20261011" defer></script>
+    <script src="creator.js?v=evidence-20261011" defer></script>
+    <link rel="stylesheet" href="hero-film.css?v=paint-strokes-20261011" />
+    <script src="hero-film.js?v=paint-strokes-20261011" defer></script>
+    <script src="hero-sequence.js?v=paint-strokes-20261011" defer></script>
+    <script src="section-mascots.js?v=paint-strokes-20261011" defer></script>
+  </head>
+  <body>
+    <div class="portfolio-initialization" aria-hidden="true">
+      <div class="splash-paint"><svg viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="paint-orange-pigment" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#d86436"/><stop offset=".6" stop-color="#ff9b60"/><stop offset="1" stop-color="#ffc293"/></linearGradient>
+          <linearGradient id="paint-steel-pigment" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#758b9d"/><stop offset=".65" stop-color="#bbccd7"/><stop offset="1" stop-color="#e0e8ed"/></linearGradient>
+          <linearGradient id="paint-blue-pigment" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#142290"/><stop offset=".5" stop-color="#3048ec"/><stop offset="1" stop-color="#567aff"/></linearGradient>
+        </defs>
+        <g class="paint-stroke paint-orange">
+          <path fill="url(#paint-orange-pigment)" d="M-200-140H1640V1020C1520 910 1560 740 1440 660C1510 550 1390 420 1425 330C1320 375 1290 265 1190 295C1125 170 980 230 940 150C820 210 695 135 610 185C495 105 335 180 230 100C125 160-50 95-200 180Z"/>
+          <path d="M-80 645C280 555 675 80 1410 95M-120 745C420 575 810 165 1530 205M-140 805C430 650 980 225 1535 245" fill="none" stroke="#ffd4ae" stroke-width="3" opacity=".34"/>
+        </g>
+        <g class="paint-stroke paint-steel">
+          <path fill="url(#paint-steel-pigment)" d="M-200-140H1640V950C1475 970 1540 810 1445 715C1480 580 1330 510 1370 415C1210 440 1300 300 1135 330C1050 250 950 295 890 210C735 275 625 190 540 245C425 200 340 265 205 215C65 285-65 240-200 320Z"/>
+          <path d="M-90 720C390 630 830 170 1510 150M-90 800C430 690 910 245 1520 225" fill="none" stroke="#eef3f6" stroke-width="2" opacity=".42"/>
+        </g>
+        <g class="paint-stroke paint-cobalt">
+          <path fill="url(#paint-blue-pigment)" d="M-240-160H1570C1530-20 1625 20 1575 100C1665 155 1550 215 1630 265C1565 330 1700 385 1625 445C1710 505 1590 575 1675 635C1585 705 1690 770 1620 835C1680 890 1550 960 1615 1020L1660 1170H-240Z"/>
+          <path d="M-240 140C-80 245 65 210 140 275C225 230 300 330 390 290C455 395 545 340 635 420C725 365 795 465 885 440C975 550 1075 500 1125 590C1250 545 1285 670 1420 645C1515 760 1590 710 1680 800V1170H-240Z" fill="#1327ad" opacity=".32"/>
+          <path d="M-120 750C280 710 675 255 1550 110M-160 840C340 730 770 330 1570 190M-100 930C400 785 940 390 1610 275" fill="none" stroke="#a0bbff" stroke-width="2" opacity=".24"/>
+          <path d="M-100 785C385 675 725 290 1520 150M-90 970C500 810 1090 345 1595 300" fill="none" stroke="#0d1b79" stroke-width="10" opacity=".15"/>
+          <path fill="#3048ec" d="M1640-130L1700 960C1645 895 1710 850 1640 800C1730 750 1650 680 1720 630C1635 570 1710 515 1630 445C1725 385 1645 330 1700 250C1620 195 1675 130 1600 80Z"/>
+        </g>
+        <g fill="#ffb783"><ellipse class="paint-satellite" cx="1250" cy="190" rx="12" ry="5" transform="rotate(-30 1250 190)"/><circle class="paint-satellite" cx="1110" cy="95" r="6"/><circle class="paint-satellite" cx="1350" cy="315" r="4"/></g>
+        <g fill="#bbccd7"><ellipse class="paint-satellite" cx="1360" cy="470" rx="15" ry="5"/><circle class="paint-satellite" cx="1220" cy="350" r="7"/></g>
+      </svg></div>
+      <span class="splash-corner splash-corner-top">OG / PORTFOLIO</span>
+      <div class="splash-identity"><span class="splash-kicker">ENGINEERING × DELIVERY × AI</span><span class="splash-name">Omkar<span class="splash-dot">.</span></span><span class="splash-surname">GOCHHAYAT</span><span class="splash-rule"></span><span class="splash-caption">Technical Program Manager</span></div>
+      <span class="splash-corner splash-corner-bottom">Initializing portfolio<span class="splash-ellipsis">…</span></span>
     </div>
-
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav">
+        <a
+          class="brand"
+          href="#main"
+          aria-label="Omkar Gochhayat home"
+          translate="no"
+          ><span class="monogram" aria-hidden="true">OG</span
+          ><span class="brand-name">Omkar Gochhayat</span></a
+        >
+        <nav class="nav-links" id="navigation" aria-label="Main navigation">
+          <a href="#work">Work</a><a href="#about">Experience</a
+          ><a
+            class="resume-nav"
+            href="https://drive.google.com/file/d/1veucMrrtlHZ9i6QxWsc1Zz96Lh6JaxC3/view"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Résumé <span class="arrow" aria-hidden="true">↗</span></a
+          ><a href="#contact">Contact</a>
+        </nav>
+        <a class="nav-cta" href="#contact"
+          >Get in touch <span class="arrow" aria-hidden="true">↗</span></a
+        >
+        <button
+          class="menu-button"
+          aria-expanded="false"
+          aria-controls="navigation"
+          hidden
+        >
+          Menu
+        </button>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <svg class="work-symbols" aria-hidden="true" width="0" height="0">
+        <defs>
+          <symbol
+            id="work-illustration-google"
+            viewBox="0 0 560 330"
+            fill="none"
+          >
+            <path
+              d="M30 20h.01M30 55h.01M30 90h.01M30 125h.01M30 160h.01M30 195h.01M30 230h.01M30 265h.01M30 300h.01M65 20h.01M65 55h.01M65 90h.01M65 125h.01M65 160h.01M65 195h.01M65 230h.01M65 265h.01M65 300h.01M100 20h.01M100 55h.01M100 90h.01M100 125h.01M100 160h.01M100 195h.01M100 230h.01M100 265h.01M100 300h.01M135 20h.01M135 55h.01M135 90h.01M135 125h.01M135 160h.01M135 195h.01M135 230h.01M135 265h.01M135 300h.01M170 20h.01M170 55h.01M170 90h.01M170 125h.01M170 160h.01M170 195h.01M170 230h.01M170 265h.01M170 300h.01M205 20h.01M205 55h.01M205 90h.01M205 125h.01M205 160h.01M205 195h.01M205 230h.01M205 265h.01M205 300h.01M240 20h.01M240 55h.01M240 90h.01M240 125h.01M240 160h.01M240 195h.01M240 230h.01M240 265h.01M240 300h.01M275 20h.01M275 55h.01M275 90h.01M275 125h.01M275 160h.01M275 195h.01M275 230h.01M275 265h.01M275 300h.01M310 20h.01M310 55h.01M310 90h.01M310 125h.01M310 160h.01M310 195h.01M310 230h.01M310 265h.01M310 300h.01M345 20h.01M345 55h.01M345 90h.01M345 125h.01M345 160h.01M345 195h.01M345 230h.01M345 265h.01M345 300h.01M380 20h.01M380 55h.01M380 90h.01M380 125h.01M380 160h.01M380 195h.01M380 230h.01M380 265h.01M380 300h.01M415 20h.01M415 55h.01M415 90h.01M415 125h.01M415 160h.01M415 195h.01M415 230h.01M415 265h.01M415 300h.01M450 20h.01M450 55h.01M450 90h.01M450 125h.01M450 160h.01M450 195h.01M450 230h.01M450 265h.01M450 300h.01M485 20h.01M485 55h.01M485 90h.01M485 125h.01M485 160h.01M485 195h.01M485 230h.01M485 265h.01M485 300h.01M520 20h.01M520 55h.01M520 90h.01M520 125h.01M520 160h.01M520 195h.01M520 230h.01M520 265h.01M520 300h.01M555 20h.01M555 55h.01M555 90h.01M555 125h.01M555 160h.01M555 195h.01M555 230h.01M555 265h.01M555 300h.01"
+              stroke="#4b5879"
+              stroke-width="2.8"
+              stroke-linecap="round"
+              opacity=".55"
+            ></path>
+            <path
+              class="svg-signal"
+              d="M117 200L280 135 443 200M117 200L280 270 443 200"
+              stroke="#ff9b60"
+              stroke-width="2"
+              stroke-dasharray="7 10"
+            ></path>
+            <circle cx="280" cy="270" r="7" fill="#ff9b60"></circle>
+            <path
+              d="M52 153v40l65 36V189Z"
+              fill="#141d42"
+              stroke="#8194d6"
+              stroke-opacity=".4"
+            ></path>
+            <path d="M117 189v40l65 -36V153Z" fill="#1f2f69"></path>
+            <path
+              d="M215 93v40l65 36V129Z"
+              fill="#141d42"
+              stroke="#8194d6"
+              stroke-opacity=".4"
+            ></path>
+            <path d="M280 129v40l65 -36V93Z" fill="#1f2f69"></path>
+            <path
+              d="M378 153v40l65 36V189Z"
+              fill="#141d42"
+              stroke="#8194d6"
+              stroke-opacity=".4"
+            ></path>
+            <path d="M443 189v40l65 -36V153Z" fill="#1f2f69"></path>
+            <g class="svg-plane">
+              <path
+                d="M52 153l65 -36 65 36 -65 36Z"
+                fill="#263b83"
+                stroke="#b8c9ff"
+                stroke-opacity=".5"
+              ></path>
+              <path
+                d="M215 93l65 -36 65 36 -65 36Z"
+                fill="#3048ec"
+                stroke="#b8c9ff"
+                stroke-opacity=".5"
+              ></path>
+              <path
+                d="M378 153l65 -36 65 36 -65 36Z"
+                fill="#263b83"
+                stroke="#b8c9ff"
+                stroke-opacity=".5"
+              ></path>
+              <circle cx="117" cy="117" r="15" fill="#aec3ff"></circle>
+              <circle cx="117" cy="117" r="7" fill="#3048ec"></circle>
+              <circle cx="280" cy="57" r="15" fill="#aec3ff"></circle>
+              <circle cx="280" cy="57" r="7" fill="#3048ec"></circle>
+              <circle cx="443" cy="117" r="15" fill="#aec3ff"></circle>
+              <circle cx="443" cy="117" r="7" fill="#3048ec"></circle>
+            </g>
+          </symbol>
+          <symbol
+            id="work-illustration-tracxn"
+            viewBox="0 0 560 330"
+            fill="none"
+          >
+            <path
+              d="M30 20h.01M30 55h.01M30 90h.01M30 125h.01M30 160h.01M30 195h.01M30 230h.01M30 265h.01M30 300h.01M65 20h.01M65 55h.01M65 90h.01M65 125h.01M65 160h.01M65 195h.01M65 230h.01M65 265h.01M65 300h.01M100 20h.01M100 55h.01M100 90h.01M100 125h.01M100 160h.01M100 195h.01M100 230h.01M100 265h.01M100 300h.01M135 20h.01M135 55h.01M135 90h.01M135 125h.01M135 160h.01M135 195h.01M135 230h.01M135 265h.01M135 300h.01M170 20h.01M170 55h.01M170 90h.01M170 125h.01M170 160h.01M170 195h.01M170 230h.01M170 265h.01M170 300h.01M205 20h.01M205 55h.01M205 90h.01M205 125h.01M205 160h.01M205 195h.01M205 230h.01M205 265h.01M205 300h.01M240 20h.01M240 55h.01M240 90h.01M240 125h.01M240 160h.01M240 195h.01M240 230h.01M240 265h.01M240 300h.01M275 20h.01M275 55h.01M275 90h.01M275 125h.01M275 160h.01M275 195h.01M275 230h.01M275 265h.01M275 300h.01M310 20h.01M310 55h.01M310 90h.01M310 125h.01M310 160h.01M310 195h.01M310 230h.01M310 265h.01M310 300h.01M345 20h.01M345 55h.01M345 90h.01M345 125h.01M345 160h.01M345 195h.01M345 230h.01M345 265h.01M345 300h.01M380 20h.01M380 55h.01M380 90h.01M380 125h.01M380 160h.01M380 195h.01M380 230h.01M380 265h.01M380 300h.01M415 20h.01M415 55h.01M415 90h.01M415 125h.01M415 160h.01M415 195h.01M415 230h.01M415 265h.01M415 300h.01M450 20h.01M450 55h.01M450 90h.01M450 125h.01M450 160h.01M450 195h.01M450 230h.01M450 265h.01M450 300h.01M485 20h.01M485 55h.01M485 90h.01M485 125h.01M485 160h.01M485 195h.01M485 230h.01M485 265h.01M485 300h.01M520 20h.01M520 55h.01M520 90h.01M520 125h.01M520 160h.01M520 195h.01M520 230h.01M520 265h.01M520 300h.01M555 20h.01M555 55h.01M555 90h.01M555 125h.01M555 160h.01M555 195h.01M555 230h.01M555 265h.01M555 300h.01"
+              stroke="#4b5879"
+              stroke-width="2.8"
+              stroke-linecap="round"
+              opacity=".55"
+            ></path>
+            <ellipse
+              cx="280"
+              cy="218"
+              rx="190"
+              ry="78"
+              stroke="#596cb2"
+              stroke-dasharray="3 10"
+            ></ellipse>
+            <g class="svg-plane">
+              <path
+                d="M280 55l140 70 -140 70 -140 -70Z"
+                fill="#3048ec"
+                stroke="#859df8"
+              ></path>
+              <path
+                d="M140 125v12l140 70 140 -70v-12M280 195v12"
+                stroke="#526fdb"
+              ></path>
+            </g>
+            <g class="svg-plane">
+              <path
+                d="M280 103l140 70 -140 70 -140 -70Z"
+                fill="#23377d"
+                stroke="#859df8"
+              ></path>
+              <path
+                d="M140 173v12l140 70 140 -70v-12M280 243v12"
+                stroke="#526fdb"
+              ></path>
+            </g>
+            <g class="svg-plane">
+              <path
+                d="M280 151l140 70 -140 70 -140 -70Z"
+                fill="#182557"
+                stroke="#859df8"
+              ></path>
+              <path
+                d="M140 221v12l140 70 140 -70v-12M280 291v12"
+                stroke="#526fdb"
+              ></path>
+            </g>
+            <path
+              class="svg-signal"
+              d="M280 54V290M65 194H130L160 211M400 211L430 194H495"
+              stroke="#ff9b60"
+              stroke-width="2"
+              stroke-dasharray="5 8"
+            ></path>
+            <circle cx="65" cy="194" r="7" fill="#ff9b60"></circle>
+            <circle cx="495" cy="194" r="7" fill="#ff9b60"></circle>
+          </symbol>
+          <symbol
+            id="work-illustration-cisco"
+            viewBox="0 0 560 330"
+            fill="none"
+          >
+            <path
+              d="M30 20h.01M30 55h.01M30 90h.01M30 125h.01M30 160h.01M30 195h.01M30 230h.01M30 265h.01M30 300h.01M65 20h.01M65 55h.01M65 90h.01M65 125h.01M65 160h.01M65 195h.01M65 230h.01M65 265h.01M65 300h.01M100 20h.01M100 55h.01M100 90h.01M100 125h.01M100 160h.01M100 195h.01M100 230h.01M100 265h.01M100 300h.01M135 20h.01M135 55h.01M135 90h.01M135 125h.01M135 160h.01M135 195h.01M135 230h.01M135 265h.01M135 300h.01M170 20h.01M170 55h.01M170 90h.01M170 125h.01M170 160h.01M170 195h.01M170 230h.01M170 265h.01M170 300h.01M205 20h.01M205 55h.01M205 90h.01M205 125h.01M205 160h.01M205 195h.01M205 230h.01M205 265h.01M205 300h.01M240 20h.01M240 55h.01M240 90h.01M240 125h.01M240 160h.01M240 195h.01M240 230h.01M240 265h.01M240 300h.01M275 20h.01M275 55h.01M275 90h.01M275 125h.01M275 160h.01M275 195h.01M275 230h.01M275 265h.01M275 300h.01M310 20h.01M310 55h.01M310 90h.01M310 125h.01M310 160h.01M310 195h.01M310 230h.01M310 265h.01M310 300h.01M345 20h.01M345 55h.01M345 90h.01M345 125h.01M345 160h.01M345 195h.01M345 230h.01M345 265h.01M345 300h.01M380 20h.01M380 55h.01M380 90h.01M380 125h.01M380 160h.01M380 195h.01M380 230h.01M380 265h.01M380 300h.01M415 20h.01M415 55h.01M415 90h.01M415 125h.01M415 160h.01M415 195h.01M415 230h.01M415 265h.01M415 300h.01M450 20h.01M450 55h.01M450 90h.01M450 125h.01M450 160h.01M450 195h.01M450 230h.01M450 265h.01M450 300h.01M485 20h.01M485 55h.01M485 90h.01M485 125h.01M485 160h.01M485 195h.01M485 230h.01M485 265h.01M485 300h.01M520 20h.01M520 55h.01M520 90h.01M520 125h.01M520 160h.01M520 195h.01M520 230h.01M520 265h.01M520 300h.01M555 20h.01M555 55h.01M555 90h.01M555 125h.01M555 160h.01M555 195h.01M555 230h.01M555 265h.01M555 300h.01"
+              stroke="#4b5879"
+              stroke-width="2.8"
+              stroke-linecap="round"
+              opacity=".55"
+            ></path>
+            <path
+              d="M84 248L280 160 476 248 280 317Z"
+              fill="#35251e"
+              stroke="#926b52"
+            ></path>
+            <path
+              class="svg-signal"
+              d="M95 249H180L226 215H335L387 249H470"
+              stroke="#ff9b60"
+              stroke-width="2"
+              stroke-dasharray="5 10"
+            ></path>
+            <g class="svg-plane">
+              <path
+                d="M115 150l72 26v80l-72 -26Z"
+                fill="#4b3528"
+                stroke="#b38566"
+              ></path>
+              <path
+                d="M187 176l25 -14v80l-25 14Z"
+                fill="#241b17"
+                stroke="#926b52"
+              ></path>
+              <path
+                d="M115 150l25 -14 72 26 -25 14Z"
+                fill="#725039"
+                stroke="#b38566"
+              ></path>
+              <path d="M127 170l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="173" cy="185" r="2" fill="#ff9b60"></circle>
+              <path d="M127 189l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="173" cy="204" r="2" fill="#ff9b60"></circle>
+              <path d="M127 208l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="173" cy="223" r="2" fill="#ff9b60"></circle>
+            </g>
+            <g class="svg-plane">
+              <path
+                d="M225 120l72 26v80l-72 -26Z"
+                fill="#4b3528"
+                stroke="#b38566"
+              ></path>
+              <path
+                d="M297 146l25 -14v80l-25 14Z"
+                fill="#241b17"
+                stroke="#926b52"
+              ></path>
+              <path
+                d="M225 120l25 -14 72 26 -25 14Z"
+                fill="#725039"
+                stroke="#b38566"
+              ></path>
+              <path d="M237 140l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="283" cy="155" r="2" fill="#ff9b60"></circle>
+              <path d="M237 159l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="283" cy="174" r="2" fill="#ff9b60"></circle>
+              <path d="M237 178l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="283" cy="193" r="2" fill="#ff9b60"></circle>
+            </g>
+            <g class="svg-plane">
+              <path
+                d="M335 90l72 26v80l-72 -26Z"
+                fill="#4b3528"
+                stroke="#b38566"
+              ></path>
+              <path
+                d="M407 116l25 -14v80l-25 14Z"
+                fill="#241b17"
+                stroke="#926b52"
+              ></path>
+              <path
+                d="M335 90l25 -14 72 26 -25 14Z"
+                fill="#725039"
+                stroke="#b38566"
+              ></path>
+              <path d="M347 110l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="393" cy="125" r="2" fill="#ff9b60"></circle>
+              <path d="M347 129l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="393" cy="144" r="2" fill="#ff9b60"></circle>
+              <path d="M347 148l45 16" stroke="#e2b397" stroke-width="3"></path>
+              <circle cx="393" cy="163" r="2" fill="#ff9b60"></circle>
+            </g>
+            <path d="M280 248l-15 -8v-16l15 -8 15 8v16Z" fill="#ff9b60"></path>
+          </symbol>
+        </defs>
+      </svg>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-atmosphere" aria-hidden="true">
+          <img src="assets/hero-atmosphere-v2.webp" width="960" height="468" alt="" decoding="async" />
+          <video id="hero-atmosphere-video" muted playsinline loop preload="none" data-src="assets/hero-atmosphere-v2.mp4" tabindex="-1"></video>
         </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-toggle" id="navToggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        <div class="nav-menu" id="navMenu">
-            <ul class="nav-links">
-                <li><a href="#home" data-text="Home">Home</a></li>
-                <li><a href="#about" data-text="About">About</a></li>
-                <li><a href="#experience" data-text="Experience">Experience</a></li>
-                <li><a href="#skills" data-text="Skills">Skills</a></li>
-                <li><a href="#certifications" data-text="Certifications">Certifications</a></li>
-                <li><a href="#contact" data-text="Contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Currently at Google</div>
-            <h1 class="hero-title glitch" data-text="Omkar Gochhayat">Omkar Gochhayat</h1>
-            <p class="hero-subtitle">PM @Google PlayStore | Ex-Cisco | McKinsey, Wharton, Cloud, Gen AI, PMI, Six Sigma Certified</p>
-            <p class="hero-description">Transitioned from engineering foundation to project management at Google, driving operational excellence and platform integrity at scale.</p>
-            <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i>
-                    Let's Connect
-                </a>
-                <a href="#about" class="btn btn-secondary">
-                    <i class="fas fa-user"></i>
-                    Explore Journey
-                </a>
+        <div class="hero-scroll-stage"><div class="hero-grid container">
+          <p class="role-label entrance">
+            TECHNICAL PROGRAM MANAGER / ENGINEERING × AI
+          </p>
+          <h1
+            class="hero-wordmark"
+            id="hero-title"
+            aria-label="Omkar Gochhayat"
+          >
+            OMKAR<span class="wordmark-dot" aria-hidden="true">*</span>
+          </h1>
+          <div class="hero-copy">
+            <p class="hero-statement">
+              Engineering depth.<br />Delivery clarity.
+            </p>
+            <p class="hero-description">
+              Technical Program Manager with an engineering foundation,
+              experience across Google Play, Tracxn and Cisco, and hands-on
+              independent AI product delivery.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#work"
+                >Explore the work
+                <span class="arrow" aria-hidden="true">↗</span></a
+              ><a
+                class="text-link"
+                href="https://drive.google.com/file/d/1veucMrrtlHZ9i6QxWsc1Zz96Lh6JaxC3/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View résumé <span class="arrow" aria-hidden="true">↗</span></a
+              >
             </div>
+          </div>
+          <div class="hero-mascot-chapter"><div class="hero-mascot-stick"><figure class="hero-figure" data-hero-film>
+            <div class="orbit-ring"></div>
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
+            <div class="art-tilt mascot-body">
+              <span class="mascot-shadow" aria-hidden="true"></span>
+              <img
+                id="hero-mascot"
+                data-idle="assets/mascot-idle.webp"
+                data-hello="assets/mascot-hello.webp"
+                class="hero-art"
+                src="assets/mascot-cutout.webp"
+                width="400"
+                height="492"
+                alt=""
+                fetchpriority="high"
+              />
+              <canvas id="hero-sequence" class="mascot-sequence" width="400" height="492" aria-hidden="true" data-manifest="assets/mascot-scroll/manifest.json"></canvas>
+            </div>
+            <button class="mascot-action" id="mascot-action" type="button" aria-label="Say hello to the mascot" title="Say hello" disabled>
+              <span class="mascot-cue" aria-hidden="true"><span class="mascot-cue-dot"></span><span id="mascot-label">Say hello</span><span class="mascot-cue-arrow">↗</span></span>
+            </button>
+          </figure>
+          <aside class="mascot-proof" aria-label="Selected experience">
+            <p class="experience-eyebrow">SELECTED EXPERIENCE</p>
+            <div class="experience-viewport">
+              <article class="experience-story is-active" data-experience-card="0" aria-hidden="false">
+                <div class="experience-logo"><img src="assets/google-wordmark.svg" width="74" height="24" alt="Google" /><span>Play</span></div>
+                <p class="experience-role">Technical Project Manager</p>
+                <p class="experience-result"><strong>$37M</strong><span>program portfolio</span></p>
+                <p class="experience-detail">8+ distributed internal and vendor teams.</p>
+              </article>
+              <article class="experience-story" data-experience-card="1" aria-hidden="true">
+                <div class="experience-logo"><img src="assets/tracxn-wordmark.svg" width="100" height="22" alt="Tracxn" /></div>
+                <p class="experience-role">Technical Program Manager</p>
+                <p class="experience-result"><strong>22</strong><span>endpoints investigated</span></p>
+                <p class="experience-detail">Evidence matrix and tracked partner escalation.</p>
+              </article>
+              <article class="experience-story" data-experience-card="2" aria-hidden="true">
+                <div class="experience-logo experience-cisco"><svg viewBox="0 0 64 34" aria-hidden="true"><path d="M4 18V24M11 12V26M18 4V28M25 12V26M32 18V24M39 12V26M46 4V28M53 12V26M60 18V24" stroke="currentColor" stroke-width="3.8" stroke-linecap="round"></path></svg><span>Cisco</span></div>
+                <p class="experience-role">Software Engineer</p>
+                <p class="experience-result"><strong>40%</strong><span>less manual regression</span></p>
+                <p class="experience-detail">Python debugging, root-cause analysis and reliability.</p>
+              </article>
+              <article class="experience-story" data-experience-card="3" aria-hidden="true">
+                <div class="experience-logo experience-screengod">ScreenGod<span class="experience-build">INDEPENDENT BUILD</span></div>
+                <p class="experience-role">Founder &amp; Lead Developer</p>
+                <p class="experience-result"><strong>AI → Android</strong><span>shipped on Google Play</span></p>
+                <p class="experience-detail">Gemini, RAG and production telemetry.</p>
+              </article>
+            </div>
+            <span class="mascot-proof-index" id="mascot-proof-index">01 / 04 · GOOGLE PLAY</span>
+            <a id="mascot-proof-link" href="#case-google" aria-label="Read the Google Play case study">Read the case <span aria-hidden="true">↗</span></a>
+            <span class="mascot-proof-track" aria-hidden="true"><i></i></span>
+            <div class="experience-controls" role="group" aria-label="Explore experience" hidden>
+              <button type="button" data-experience-step="0" aria-label="Show Google Play experience" aria-pressed="true"><span></span></button>
+              <button type="button" data-experience-step="1" aria-label="Show Tracxn experience" aria-pressed="false"><span></span></button>
+              <button type="button" data-experience-step="2" aria-label="Show Cisco experience" aria-pressed="false"><span></span></button>
+              <button type="button" data-experience-step="3" aria-label="Show ScreenGod independent build" aria-pressed="false"><span></span></button>
+            </div>
+            <span class="mascot-proof-instruction">Scroll or select an experience</span>
+          </aside></div></div>
+          <div class="hero-motion-control">
+            <button
+              class="motion-button"
+              id="motion"
+              role="switch"
+              aria-label="Animations"
+              aria-checked="true"
+              hidden
+            >
+              Animations: On
+            </button>
+          </div>
+          <p class="hero-location">
+            Bhubaneswar, India<br />Open to remote work
+            <span aria-hidden="true">↗</span>
+          </p>
+          <p class="hero-scroll" aria-hidden="true">
+            Scroll to meet the mind behind the work <span>↓</span>
+          </p>
         </div>
-</div>
+        </div><div class="hero-foot container">
+          <p class="signature" translate="no">
+            Omkar Gochhayat<small>Technical Program Manager</small>
+          </p>
+          <div
+            class="experience-strip"
+            aria-label="Selected experience across Google Play, Tracxn and Cisco"
+          >
+            <a
+              class="experience-brand brand-google"
+              href="#case-google"
+              aria-label="Google Play — technical programs"
+              translate="no"
+              ><span class="google-lockup"
+                ><img
+                  class="brand-wordmark"
+                  src="assets/google-wordmark.svg"
+                  width="74"
+                  height="24"
+                  alt=""
+                /><span class="play-label">Play</span></span
+              ><span class="brand-description">Technical programs</span></a
+            >
+            <a
+              class="experience-brand brand-tracxn"
+              href="#case-tracxn"
+              aria-label="Tracxn — Technical Program Manager"
+              translate="no"
+              ><span class="brand-plate"
+                ><img
+                  class="brand-wordmark"
+                  src="assets/tracxn-wordmark.svg"
+                  width="100"
+                  height="22"
+                  alt="" /></span
+              ><span class="brand-description">Technical programs</span></a
+            >
+            <a
+              class="experience-brand brand-cisco"
+              href="#case-cisco"
+              aria-label="Cisco — engineering and reliability"
+              translate="no"
+              ><span class="cisco-lockup"
+                ><svg
+                  class="cisco-bridge"
+                  viewBox="0 0 64 34"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 18V24M11 12V26M18 4V28M25 12V26M32 18V24M39 12V26M46 4V28M53 12V26M60 18V24"
+                    stroke="currentColor"
+                    stroke-width="3.8"
+                    stroke-linecap="round"
+                  ></path></svg
+                ><span>Cisco</span></span
+              ><span class="brand-description"
+                >Engineering &amp; reliability</span
+              ></a
+            >
+          </div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
+      </section>
+      <section class="profile-lab" id="profile" aria-labelledby="profile-title">
+        <div class="profile-orbits" aria-hidden="true"><i></i><i></i></div>
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Building scalable solutions at tech giants with comprehensive skillset bridging engineering and management</p>
+          <div class="about-grid profile-grid">
+            <div class="about-copy">
+              <p class="chapter-label">01 / MEET THE MIND</p>
+              <h2 id="profile-title">
+                Close to the code.<em>Closer to the outcome.</em>
+              </h2>
+              <p>
+                I lead technical delivery across APIs, releases and global
+                teams. I also build ScreenGod, an AI-powered Android product,
+                from requirements through deployment and telemetry.
+              </p>
+              <div class="about-links">
+                <a
+                  class="text-link"
+                  href="https://www.linkedin.com/in/omkar-gochhayat/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >LinkedIn <span class="arrow" aria-hidden="true">↗</span></a
+                ><a
+                  class="text-link"
+                  href="https://github.com/Omkar142"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >GitHub <span class="arrow" aria-hidden="true">↗</span></a
+                >
+              </div>
             </div>
-            <div class="about-grid">
-                <div class="about-visual">
-                    <div class="code-simulation">
-                        <div class="code-line">class ProjectManager {</div>
-                        <div class="code-line">  expertise: 'Google + Cisco'</div>
-                        <div class="code-line">  impact: '33% AHT reduction'</div>
-                        <div class="code-line">  skills: ['PM', 'AI', 'Cloud']</div>
-                        <div class="code-line">}</div>
-                    </div>
-                </div>
-                <div class="about-content">
-                    <h3>Strategic Project Leader</h3>
-                    <div class="about-text">
-                        <p>Transitioned from an engineering foundation (B.Tech CSE, Cisco Systems) into project management at Google, driven by a passion for solving complex operational problems and driving efficiency at scale.</p>
-                        
-                        <p>My technical background allows me to effectively bridge the gap between engineering realities and business objectives, complemented by continuous learning in emerging technologies like Generative AI.</p>
-                        
-                        <p>I rapidly developed expertise in leading cross-functional projects, engaging stakeholders across Engineering, Product, Operations, and Policy, leveraging data analysis for decision-making, and optimizing complex workflows.</p>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">33%</span>
-                            <span class="stat-label">AHT Reduction</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">8+</span>
-                            <span class="stat-label">Global Sites</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">15%</span>
-                            <span class="stat-label">Forecast Accuracy</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="editor" aria-label="Interactive profile codepad">
+              <div class="editor-top">
+                <span class="editor-lights" aria-hidden="true"
+                  ><i></i><i></i><i></i
+                ></span>
+                <span translate="no">omkar.ts</span
+                ><span>Interactive profile</span>
+              </div>
+              <div
+                class="code-modes"
+                role="group"
+                aria-label="Choose profile perspective"
+                hidden
+              >
+                <button data-mode="engineering" aria-pressed="true">
+                  Engineering</button
+                ><button data-mode="delivery" aria-pressed="false">
+                  Delivery</button
+                ><button data-mode="ai" aria-pressed="false">AI product</button>
+              </div>
+              <div class="code-shell">
+                <pre id="code" translate="no" aria-hidden="true">
+const omkar = {
+  role: "Technical Program Manager",
+  foundation: "Engineering",
+  experience: ["Google Play", "Tracxn", "Cisco"],
+  aiProduct: "ScreenGod / Android",
+  delivery: "APIs → releases → outcomes",
+  collaboration: "Remote"
+};</pre>
+              </div>
+              <div class="editor-footer">
+                <span id="code-status" aria-live="polite"
+                  >An engineering foundation, with a focus on useful
+                  outcomes.</span
+                ><button class="replay" id="replay" hidden>Replay ↺</button>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section experience">
+      </section>
+      <section class="impact" aria-labelledby="impact-title">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Professional Journey</h2>
-                <p class="section-subtitle">Leading complex initiatives and driving operational excellence across global organizations</p>
+          <div class="impact-head">
+            <p class="chapter-label">02 / DELIVERY OUTCOMES</p>
+            <h2 id="impact-title">The work.<br />The outcomes.</h2>
+            <p>Google program governance and Tracxn B2B delivery.</p>
+          </div>
+          <div class="impact-metrics">
+            <div class="impact-stat">
+              <strong
+                class="metric-number"
+                data-count="50"
+                data-suffix="%"
+                aria-label="50% Critical backlog reduced"
+                ><span class="metric-value" aria-hidden="true">50</span
+                ><span class="metric-suffix" aria-hidden="true">%</span></strong
+              >
+              <div class="metric-caption">
+                <span>Critical backlog reduced</span
+                ><span aria-hidden="true">↗</span>
+              </div>
+              <p class="metric-context">Google · in 90 days</p>
+              <div class="metric-track" aria-hidden="true"><i></i></div>
             </div>
-            <div class="timeline">
-                <!-- Google Experience -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-company">Google</div>
-                                <div class="job-title">Project Manager</div>
-                                <div class="job-location">📍 Hyderabad, Telangana, India</div>
-                            </div>
-                            <div class="job-duration">March 2024 - Present</div>
-                        </div>
-                        
-                        <div class="achievement-section">
-                            <div class="achievement-title">Strategic Governance & Financial Management</div>
-                            <ul class="achievement-list">
-                                <li><span class="highlight">Financial Governance:</span> Developed a Global OPEX Tracker across 8 sites, improving forecast accuracy by <strong>15%</strong></li>
-                                <li><span class="highlight">SaaS Governance:</span> Architected a central tool catalog and ownership matrix, reducing duplicate spend and improving auditability</li>
-                                <li><span class="highlight">Executive Reporting:</span> Standardized the MBR/QBR cadence, reducing preparation overhead by <strong>40%</strong> and enhancing strategic decision-making</li>
-                            </ul>
-                        </div>
-
-                        <div class="achievement-section">
-                            <div class="achievement-title">Operational Excellence & Process Re-engineering</div>
-                            <ul class="achievement-list">
-                                <li><span class="highlight">AHT & Backlog Reduction:</span> Led the App Expedite Reviews (AER) program, re-engineering workflows to achieve a <strong>33% reduction in Average Handling Time (AHT)</strong> and clear a 7-month critical backlog in 2 months</li>
-                                <li><span class="highlight">Process Optimization:</span> Drove cross-functional efforts (Ops, Eng, Policy) to identify systemic bottlenecks and standardize triaging, further reducing AHT from ~17 to ~15 mins</li>
-                            </ul>
-                        </div>
-
-                        <div class="achievement-section">
-                            <div class="achievement-title">Global Vendor & Partner Strategy</div>
-                            <ul class="achievement-list">
-                                <li><span class="highlight">Cost Optimization:</span> Drove EPP Vendor Strategy analysis, identifying <strong>>10% potential FTE savings</strong> and presenting data-driven recommendations</li>
-                                <li><span class="highlight">Workforce Stability:</span> Initiated and led a Root Cause Analysis (RCA) of attrition across 5 global sites, co-developing retention strategies with HR, Ops, and vendor leadership</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cisco Experience -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-company">Cisco</div>
-                                <div class="job-title">Software Test Engineer Trainee</div>
-                                <div class="job-location">📍 Bengaluru, Karnataka, India</div>
-                            </div>
-                            <div class="job-duration">Dec 2022 - Dec 2023</div>
-                        </div>
-                        
-                        <div class="achievement-section">
-                            <div class="achievement-title">System Performance & Reliability</div>
-                            <ul class="achievement-list">
-                                <li><span class="highlight">Automated Validation Frameworks:</span> Designed and implemented automated test suites using Python to rigorously validate complex system interactions</li>
-                                <li><span class="highlight">Critical Bug Resolution:</span> Spearheaded a critical bug fix that resulted in a remarkable <strong>15% improvement in device efficiency</strong>, contributing to a <strong>5% increase in overall company productivity</strong></li>
-                                <li><span class="highlight">Quality Assurance:</span> Successfully executed and documented over <strong>20+ Test Cases</strong>, identifying and reporting high-severity (Sev4) bugs</li>
-                            </ul>
-                        </div>
-
-                        <div class="achievement-section">
-                            <div class="achievement-title">Technical Stack</div>
-                            <ul class="achievement-list">
-                                <li>Python, PyCharm, Cisco ASA, FTD, FMC, FCM, TeraVM, Termius</li>
-                                <li>Java, Eclipse, GoLang, Cisco ASDM</li>
-                                <li>Automation Engineering focus on DHCP-v6 feature for VPN</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SimpleeKare Experience -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-company">SimpleeKare</div>
-                                <div class="job-title">Software Engineer Intern</div>
-                                <div class="job-location">📍 Bhubaneswar, Orissa, India</div>
-                            </div>
-                            <div class="job-duration">Dec 2021 - Jan 2022</div>
-                        </div>
-                        
-                        <div class="achievement-section">
-                            <div class="achievement-title">Development & Testing</div>
-                            <ul class="achievement-list">
-                                <li><span class="highlight">Frontend Development:</span> Contributed to the development of the Prescription Display System using ReactJS</li>
-                                <li><span class="highlight">Quality Assurance:</span> Performed comprehensive testing and bug fixing to ensure system reliability</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="impact-stat">
+              <strong
+                class="metric-number"
+                data-count="40"
+                data-suffix="+"
+                aria-label="40+ Production releases"
+                ><span class="metric-value" aria-hidden="true">40</span
+                ><span class="metric-suffix" aria-hidden="true">+</span></strong
+              >
+              <div class="metric-caption">
+                <span>Production releases</span
+                ><span aria-hidden="true">↗</span>
+              </div>
+              <p class="metric-context">Tracxn · May–Aug 2026</p>
+              <div class="metric-track" aria-hidden="true"><i></i></div>
             </div>
+            <div class="impact-stat">
+              <strong
+                class="metric-number"
+                data-count="23"
+                data-suffix=""
+                aria-label="23 Organizations onboarded"
+                ><span class="metric-value" aria-hidden="true">23</span
+                ><span class="metric-suffix" aria-hidden="true"></span
+              ></strong>
+              <div class="metric-caption">
+                <span>Organizations onboarded</span
+                ><span aria-hidden="true">↗</span>
+              </div>
+              <p class="metric-context">Tracxn · growth from 1</p>
+              <div class="metric-track" aria-hidden="true"><i></i></div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
+      <section class="container section" id="work" aria-labelledby="work-title">
+        <div class="section-head reveal">
+          <p class="chapter-label">03 / SELECTED WORK</p>
+          <h2 id="work-title">Selected<br /><em>work.</em></h2>
+          <p>
+            Program leadership, B2B delivery, a shipped AI product and the
+            engineering foundation behind them.
+          </p>
+        </div>
+        <div class="project-explorer reveal">
+          <div
+            class="project-choices"
+            role="group"
+            aria-label="Choose a project"
+            hidden
+          >
+            <button
+              class="project-choice"
+              data-project="google"
+              aria-pressed="true"
+              aria-controls="case-google"
+            >
+              <span class="choice-index">01</span
+              ><span class="choice-name"
+                >Google Play<small>Technical programs</small></span
+              ><span class="choice-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button
+              class="project-choice"
+              data-project="tracxn"
+              aria-pressed="false"
+              aria-controls="case-tracxn"
+            >
+              <span class="choice-index">02</span
+              ><span class="choice-name">Tracxn<small>B2B delivery</small></span
+              ><span class="choice-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button
+              class="project-choice"
+              data-project="screengod"
+              aria-pressed="false"
+              aria-controls="case-screengod"
+            >
+              <span class="choice-index">03</span
+              ><span class="choice-name"
+                >ScreenGod<small>AI product</small></span
+              ><span class="choice-arrow" aria-hidden="true">↗</span></button
+            ><button
+              class="project-choice"
+              data-project="cisco"
+              aria-pressed="false"
+              aria-controls="case-cisco"
+            >
+              <span class="choice-index">04</span
+              ><span class="choice-name">Cisco<small>Engineering</small></span
+              ><span class="choice-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <div class="project-stage">
+            <article
+              class="case-study"
+              id="case-google"
+              aria-labelledby="google-title"
+              data-motion-card
+            >
+              <div class="case-header">
+                <span class="case-number" aria-hidden="true">01</span>
+                <p class="case-company" translate="no">
+                  <span class="company-square" aria-hidden="true">G</span>Google
+                  Play · Technical Project Manager
+                </p>
+              </div>
+              <div class="case-cover">
+                <div>
+                  <h3 class="case-title" id="google-title">
+                    Lead the program. Surface the blockers.
+                  </h3>
+                  <p class="case-intro">
+                    50% less critical backlog in 90 days. Approximately 40%
+                    faster incident response.
+                  </p>
+                </div>
+                <div class="case-art" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 560 330"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M30 20h.01M30 55h.01M30 90h.01M30 125h.01M30 160h.01M30 195h.01M30 230h.01M30 265h.01M30 300h.01M65 20h.01M65 55h.01M65 90h.01M65 125h.01M65 160h.01M65 195h.01M65 230h.01M65 265h.01M65 300h.01M100 20h.01M100 55h.01M100 90h.01M100 125h.01M100 160h.01M100 195h.01M100 230h.01M100 265h.01M100 300h.01M135 20h.01M135 55h.01M135 90h.01M135 125h.01M135 160h.01M135 195h.01M135 230h.01M135 265h.01M135 300h.01M170 20h.01M170 55h.01M170 90h.01M170 125h.01M170 160h.01M170 195h.01M170 230h.01M170 265h.01M170 300h.01M205 20h.01M205 55h.01M205 90h.01M205 125h.01M205 160h.01M205 195h.01M205 230h.01M205 265h.01M205 300h.01M240 20h.01M240 55h.01M240 90h.01M240 125h.01M240 160h.01M240 195h.01M240 230h.01M240 265h.01M240 300h.01M275 20h.01M275 55h.01M275 90h.01M275 125h.01M275 160h.01M275 195h.01M275 230h.01M275 265h.01M275 300h.01M310 20h.01M310 55h.01M310 90h.01M310 125h.01M310 160h.01M310 195h.01M310 230h.01M310 265h.01M310 300h.01M345 20h.01M345 55h.01M345 90h.01M345 125h.01M345 160h.01M345 195h.01M345 230h.01M345 265h.01M345 300h.01M380 20h.01M380 55h.01M380 90h.01M380 125h.01M380 160h.01M380 195h.01M380 230h.01M380 265h.01M380 300h.01M415 20h.01M415 55h.01M415 90h.01M415 125h.01M415 160h.01M415 195h.01M415 230h.01M415 265h.01M415 300h.01M450 20h.01M450 55h.01M450 90h.01M450 125h.01M450 160h.01M450 195h.01M450 230h.01M450 265h.01M450 300h.01M485 20h.01M485 55h.01M485 90h.01M485 125h.01M485 160h.01M485 195h.01M485 230h.01M485 265h.01M485 300h.01M520 20h.01M520 55h.01M520 90h.01M520 125h.01M520 160h.01M520 195h.01M520 230h.01M520 265h.01M520 300h.01M555 20h.01M555 55h.01M555 90h.01M555 125h.01M555 160h.01M555 195h.01M555 230h.01M555 265h.01M555 300h.01"
+                      stroke="#4b5879"
+                      stroke-width="2.8"
+                      stroke-linecap="round"
+                      opacity=".55"
+                    ></path>
+                    <path
+                      class="svg-signal"
+                      d="M117 200L280 135 443 200M117 200L280 270 443 200"
+                      stroke="#ff9b60"
+                      stroke-width="2"
+                      stroke-dasharray="7 10"
+                    ></path>
+                    <circle cx="280" cy="270" r="7" fill="#ff9b60"></circle>
+                    <path
+                      d="M52 153v40l65 36V189Z"
+                      fill="#141d42"
+                      stroke="#8194d6"
+                      stroke-opacity=".4"
+                    ></path>
+                    <path d="M117 189v40l65 -36V153Z" fill="#1f2f69"></path>
+                    <path
+                      d="M215 93v40l65 36V129Z"
+                      fill="#141d42"
+                      stroke="#8194d6"
+                      stroke-opacity=".4"
+                    ></path>
+                    <path d="M280 129v40l65 -36V93Z" fill="#1f2f69"></path>
+                    <path
+                      d="M378 153v40l65 36V189Z"
+                      fill="#141d42"
+                      stroke="#8194d6"
+                      stroke-opacity=".4"
+                    ></path>
+                    <path d="M443 189v40l65 -36V153Z" fill="#1f2f69"></path>
+                    <g class="svg-plane">
+                      <path
+                        d="M52 153l65 -36 65 36 -65 36Z"
+                        fill="#263b83"
+                        stroke="#b8c9ff"
+                        stroke-opacity=".5"
+                      ></path>
+                      <path
+                        d="M215 93l65 -36 65 36 -65 36Z"
+                        fill="#3048ec"
+                        stroke="#b8c9ff"
+                        stroke-opacity=".5"
+                      ></path>
+                      <path
+                        d="M378 153l65 -36 65 36 -65 36Z"
+                        fill="#263b83"
+                        stroke="#b8c9ff"
+                        stroke-opacity=".5"
+                      ></path>
+                      <circle cx="117" cy="117" r="15" fill="#aec3ff"></circle>
+                      <circle cx="117" cy="117" r="7" fill="#3048ec"></circle>
+                      <circle cx="280" cy="57" r="15" fill="#aec3ff"></circle>
+                      <circle cx="280" cy="57" r="7" fill="#3048ec"></circle>
+                      <circle cx="443" cy="117" r="15" fill="#aec3ff"></circle>
+                      <circle cx="443" cy="117" r="7" fill="#3048ec"></circle>
+                    </g></svg
+                  ><small>WORKFLOW / TEAM COORDINATION</small>
+                </div>
+              </div>
+              <details class="case-details">
+                <summary>
+                  Read the Google Play story
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </summary>
+                <div
+                  class="case-flow"
+                  aria-label="Operational improvement approach"
+                >
+                  <div class="flow-step">
+                    <b>Instrument</b>
+                    <p>
+                      SQL / PLX dashboards for throughput, aging and blockers.
+                    </p>
+                  </div>
+                  <div class="flow-step">
+                    <b>Coordinate</b>
+                    <p>
+                      Integrated plans, owners, dependencies and executive
+                      updates.
+                    </p>
+                  </div>
+                  <div class="flow-step">
+                    <b>Correct</b>
+                    <p>Performance reviews and tracked corrective actions.</p>
+                  </div>
+                </div>
+                <div class="case-columns">
+                  <div>
+                    <h4>Context</h4>
+                    <p>
+                      8+ distributed internal and vendor teams supporting a $37M
+                      global operating portfolio.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>My contribution</h4>
+                    <p>
+                      Built SQL / PLX dashboards and owned operating cadence,
+                      capacity, milestones, risks and escalations.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>Outcome</h4>
+                    <p>
+                      50% critical backlog reduction in 90 days; approximately
+                      40% faster incident response; contributed to approximately
+                      $2M in cost avoidance.
+                    </p>
+                  </div>
+                </div>
+                <p class="detail-content">
+                  Mar 2024–Mar 2026 · Technical Project Manager, Strategic
+                  Programs &amp; Operations. Improved forecasting, reporting,
+                  ownership and resource-allocation mechanisms across global
+                  teams.
+                </p>
+              </details>
+            </article>
+            <article
+              class="case-study"
+              id="case-tracxn"
+              aria-labelledby="tracxn-title"
+              data-motion-card
+            >
+              <div class="case-header">
+                <span class="case-number" aria-hidden="true">02</span>
+                <p class="case-company" translate="no">
+                  <span class="company-square" aria-hidden="true">T</span>Tracxn
+                  · Technical Program Manager
+                </p>
+              </div>
+              <div class="case-cover">
+                <div>
+                  <h3 class="case-title" id="tracxn-title">
+                    Isolate the blocker. Unblock the delivery.
+                  </h3>
+                  <p class="case-intro">
+                    22 API endpoints mapped. 15 concurrent workstreams. 40+
+                    production releases.
+                  </p>
+                </div>
+                <div class="case-art" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 560 330"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M30 20h.01M30 55h.01M30 90h.01M30 125h.01M30 160h.01M30 195h.01M30 230h.01M30 265h.01M30 300h.01M65 20h.01M65 55h.01M65 90h.01M65 125h.01M65 160h.01M65 195h.01M65 230h.01M65 265h.01M65 300h.01M100 20h.01M100 55h.01M100 90h.01M100 125h.01M100 160h.01M100 195h.01M100 230h.01M100 265h.01M100 300h.01M135 20h.01M135 55h.01M135 90h.01M135 125h.01M135 160h.01M135 195h.01M135 230h.01M135 265h.01M135 300h.01M170 20h.01M170 55h.01M170 90h.01M170 125h.01M170 160h.01M170 195h.01M170 230h.01M170 265h.01M170 300h.01M205 20h.01M205 55h.01M205 90h.01M205 125h.01M205 160h.01M205 195h.01M205 230h.01M205 265h.01M205 300h.01M240 20h.01M240 55h.01M240 90h.01M240 125h.01M240 160h.01M240 195h.01M240 230h.01M240 265h.01M240 300h.01M275 20h.01M275 55h.01M275 90h.01M275 125h.01M275 160h.01M275 195h.01M275 230h.01M275 265h.01M275 300h.01M310 20h.01M310 55h.01M310 90h.01M310 125h.01M310 160h.01M310 195h.01M310 230h.01M310 265h.01M310 300h.01M345 20h.01M345 55h.01M345 90h.01M345 125h.01M345 160h.01M345 195h.01M345 230h.01M345 265h.01M345 300h.01M380 20h.01M380 55h.01M380 90h.01M380 125h.01M380 160h.01M380 195h.01M380 230h.01M380 265h.01M380 300h.01M415 20h.01M415 55h.01M415 90h.01M415 125h.01M415 160h.01M415 195h.01M415 230h.01M415 265h.01M415 300h.01M450 20h.01M450 55h.01M450 90h.01M450 125h.01M450 160h.01M450 195h.01M450 230h.01M450 265h.01M450 300h.01M485 20h.01M485 55h.01M485 90h.01M485 125h.01M485 160h.01M485 195h.01M485 230h.01M485 265h.01M485 300h.01M520 20h.01M520 55h.01M520 90h.01M520 125h.01M520 160h.01M520 195h.01M520 230h.01M520 265h.01M520 300h.01M555 20h.01M555 55h.01M555 90h.01M555 125h.01M555 160h.01M555 195h.01M555 230h.01M555 265h.01M555 300h.01"
+                      stroke="#4b5879"
+                      stroke-width="2.8"
+                      stroke-linecap="round"
+                      opacity=".55"
+                    ></path>
+                    <ellipse
+                      cx="280"
+                      cy="218"
+                      rx="190"
+                      ry="78"
+                      stroke="#596cb2"
+                      stroke-dasharray="3 10"
+                    ></ellipse>
+                    <g class="svg-plane">
+                      <path
+                        d="M280 55l140 70 -140 70 -140 -70Z"
+                        fill="#3048ec"
+                        stroke="#859df8"
+                      ></path>
+                      <path
+                        d="M140 125v12l140 70 140 -70v-12M280 195v12"
+                        stroke="#526fdb"
+                      ></path>
+                    </g>
+                    <g class="svg-plane">
+                      <path
+                        d="M280 103l140 70 -140 70 -140 -70Z"
+                        fill="#23377d"
+                        stroke="#859df8"
+                      ></path>
+                      <path
+                        d="M140 173v12l140 70 140 -70v-12M280 243v12"
+                        stroke="#526fdb"
+                      ></path>
+                    </g>
+                    <g class="svg-plane">
+                      <path
+                        d="M280 151l140 70 -140 70 -140 -70Z"
+                        fill="#182557"
+                        stroke="#859df8"
+                      ></path>
+                      <path
+                        d="M140 221v12l140 70 140 -70v-12M280 291v12"
+                        stroke="#526fdb"
+                      ></path>
+                    </g>
+                    <path
+                      class="svg-signal"
+                      d="M280 54V290M65 194H130L160 211M400 211L430 194H495"
+                      stroke="#ff9b60"
+                      stroke-width="2"
+                      stroke-dasharray="5 8"
+                    ></path>
+                    <circle cx="65" cy="194" r="7" fill="#ff9b60"></circle>
+                    <circle
+                      cx="495"
+                      cy="194"
+                      r="7"
+                      fill="#ff9b60"
+                    ></circle></svg
+                  ><small>ARCHITECTURE / APPLICATION LAYERS</small>
+                </div>
+              </div>
+              <details class="case-details">
+                <summary>
+                  Read the Tracxn story
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </summary>
+                <div class="architecture" aria-label="Application architecture">
+                  <div>
+                    <span>INTERFACE</span><b>Next.js 14</b
+                    ><small>Frontend application</small>
+                  </div>
+                  <div>
+                    <span>APPLICATION</span><b>Node + Express</b
+                    ><small>APIs and business logic</small>
+                  </div>
+                  <div>
+                    <span>DATA</span><b>PostgreSQL</b
+                    ><small>Data and access records</small>
+                  </div>
+                </div>
+                <div class="technical-points">
+                  <span>JWT authentication</span><span>Organisation roles</span
+                  ><span>Caching</span><span>Request deduplication</span>
+                </div>
+                <div class="case-columns">
+                  <div>
+                    <h4>Context</h4>
+                    <p>
+                      A B2B SaaS platform with delivery dependencies across
+                      APIs, authentication, RBAC, caching and production
+                      readiness.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>My contribution</h4>
+                    <p>
+                      Built a 22-endpoint evidence matrix for a third-party API
+                      permissions blocker, drove VP-level escalation and tracked
+                      partner action.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>Outcome</h4>
+                    <p>
+                      Helped remove approximately 5 seconds of latency, enabling
+                      approximately 3× faster iteration. Supported growth from 1
+                      to 23 onboarded organizations.
+                    </p>
+                  </div>
+                </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section">
+                <p class="detail-content">
+                  May–Aug 2026 · Managed end-to-end delivery across 15 technical
+                  workstreams: requirements, milestones, owners, testing
+                  criteria and 40+ production releases. Architecture included a
+                  30-minute cache, concurrency of 8, request deduplication and
+                  one-year unlock expiry with audit logs.
+                </p>
+              </details>
+            </article>
+            <article
+              class="case-study case-screengod"
+              id="case-screengod"
+              aria-labelledby="screengod-title"
+              data-motion-card
+            >
+              <div class="case-header">
+                <span class="case-number" aria-hidden="true">03</span>
+                <p class="case-company" translate="no">
+                  <img
+                    src="assets/screengod-icon.webp"
+                    width="240"
+                    height="240"
+                    alt=""
+                    loading="lazy"
+                  />ScreenGod · Founder &amp; Lead Developer
+                </p>
+                <a
+                  class="case-live-link"
+                  href="https://play.google.com/store/apps/details?id=com.contextmaster"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View on Google Play
+                  <span class="arrow" aria-hidden="true">↗</span></a
+                >
+              </div>
+              <div class="case-cover">
+                <div>
+                  <h3 class="case-title" id="screengod-title">
+                    An AI idea.<br />A shipped Android product.
+                  </h3>
+                  <p class="case-intro">
+                    Screen understanding, text explanations and conversational
+                    help—delivered as a real Android app.
+                  </p>
+                  <div class="technical-points">
+                    <span>Gemini API</span><span>RAG</span
+                    ><span>Firebase Crashlytics</span
+                    ><span>Production telemetry</span>
+                  </div>
+                </div>
+                <div class="case-art screengod-art">
+                  <div class="product-model">
+                    <div class="product-model-top"><span class="product-orbit" aria-hidden="true">S</span><span>ScreenGod<small>AI SCREEN ASSISTANT</small></span><span class="product-model-index" aria-hidden="true">01 → 03</span></div>
+                    <div class="product-context"><span class="model-label">01 / SCREEN CONTEXT</span><p>Natural language processing (NLP)</p><span class="selection-corner" aria-hidden="true"></span></div>
+                    <div class="product-connector" aria-hidden="true"><span></span><b>↓</b></div>
+                    <div class="product-engine"><span class="model-label">02 / UNDERSTAND</span><div><span>Gemini API</span><span>Retrieval / RAG</span></div></div>
+                    <div class="product-connector" aria-hidden="true"><span></span><b>↓</b></div>
+                    <div class="product-answer"><span class="model-label">03 / USEFUL ANSWER</span><p>NLP helps computers understand and work with human language.</p></div>
+                    <p class="product-model-caption">Illustrative product flow</p>
+                  </div>
+                </div>
+              </div>
+              <details class="case-details">
+                <summary>
+                  Read the ScreenGod story
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </summary>
+                <div class="case-flow" aria-label="AI product delivery loop">
+                  <div class="flow-step">
+                    <b>Define</b>
+                    <p>Requirements, backlog priorities and API integration.</p>
+                  </div>
+                  <div class="flow-step">
+                    <b>Ship</b>
+                    <p>Testing, deployment and release readiness.</p>
+                  </div>
+                  <div class="flow-step">
+                    <b>Learn</b>
+                    <p>Telemetry, issue resolution and continuous iteration.</p>
+                  </div>
+                </div>
+                <div class="case-columns">
+                  <div>
+                    <h4>Problem</h4>
+                    <p>
+                      Help people understand text and screen content while using
+                      their phone.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>My contribution</h4>
+                    <p>
+                      Own the end-to-end product loop, including Gemini
+                      integration, retrieval/RAG, testing, deployment and
+                      production monitoring.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>Evidence</h4>
+                    <p>
+                      A published Android app under my name. The Google Play
+                      listing shows the product, screenshots and
+                      screen-assistant use cases.
+                    </p>
+                    <a
+                      class="text-link"
+                      href="https://play.google.com/store/apps/details?id=com.contextmaster"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Open the app listing
+                      <span class="arrow" aria-hidden="true">↗</span></a
+                    >
+                  </div>
+                </div>
+                <p class="detail-content">
+                  Oct 2024–Present · Independent product. Built with Gemini API
+                  and RAG; Firebase Crashlytics and production telemetry support
+                  issue resolution and continuous iteration.
+                </p>
+              </details>
+              <details class="published-product">
+                <summary>View the published app screenshot <span aria-hidden="true">↗</span></summary>
+                <figure><img src="assets/screengod-product.webp" width="480" height="960" alt="Original ScreenGod promotional screenshot from its Google Play listing" loading="lazy" /><figcaption>Original Google Play listing artwork</figcaption></figure>
+              </details>
+            </article>
+            <article
+              class="case-study"
+              id="case-cisco"
+              aria-labelledby="cisco-title"
+              data-motion-card
+            >
+              <div class="case-header">
+                <span class="case-number" aria-hidden="true">04</span>
+                <p class="case-company" translate="no">
+                  <span class="company-square" aria-hidden="true">C</span>Cisco
+                  · Software Engineer
+                </p>
+              </div>
+              <div class="case-cover">
+                <div>
+                  <h3 class="case-title" id="cisco-title">
+                    Automate the regression. Verify the fix.
+                  </h3>
+                  <p class="case-intro">
+                    40% less manual regression effort. Approximately 15% better
+                    hardware/test efficiency.
+                  </p>
+                </div>
+                <div class="case-art" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 560 330"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M30 20h.01M30 55h.01M30 90h.01M30 125h.01M30 160h.01M30 195h.01M30 230h.01M30 265h.01M30 300h.01M65 20h.01M65 55h.01M65 90h.01M65 125h.01M65 160h.01M65 195h.01M65 230h.01M65 265h.01M65 300h.01M100 20h.01M100 55h.01M100 90h.01M100 125h.01M100 160h.01M100 195h.01M100 230h.01M100 265h.01M100 300h.01M135 20h.01M135 55h.01M135 90h.01M135 125h.01M135 160h.01M135 195h.01M135 230h.01M135 265h.01M135 300h.01M170 20h.01M170 55h.01M170 90h.01M170 125h.01M170 160h.01M170 195h.01M170 230h.01M170 265h.01M170 300h.01M205 20h.01M205 55h.01M205 90h.01M205 125h.01M205 160h.01M205 195h.01M205 230h.01M205 265h.01M205 300h.01M240 20h.01M240 55h.01M240 90h.01M240 125h.01M240 160h.01M240 195h.01M240 230h.01M240 265h.01M240 300h.01M275 20h.01M275 55h.01M275 90h.01M275 125h.01M275 160h.01M275 195h.01M275 230h.01M275 265h.01M275 300h.01M310 20h.01M310 55h.01M310 90h.01M310 125h.01M310 160h.01M310 195h.01M310 230h.01M310 265h.01M310 300h.01M345 20h.01M345 55h.01M345 90h.01M345 125h.01M345 160h.01M345 195h.01M345 230h.01M345 265h.01M345 300h.01M380 20h.01M380 55h.01M380 90h.01M380 125h.01M380 160h.01M380 195h.01M380 230h.01M380 265h.01M380 300h.01M415 20h.01M415 55h.01M415 90h.01M415 125h.01M415 160h.01M415 195h.01M415 230h.01M415 265h.01M415 300h.01M450 20h.01M450 55h.01M450 90h.01M450 125h.01M450 160h.01M450 195h.01M450 230h.01M450 265h.01M450 300h.01M485 20h.01M485 55h.01M485 90h.01M485 125h.01M485 160h.01M485 195h.01M485 230h.01M485 265h.01M485 300h.01M520 20h.01M520 55h.01M520 90h.01M520 125h.01M520 160h.01M520 195h.01M520 230h.01M520 265h.01M520 300h.01M555 20h.01M555 55h.01M555 90h.01M555 125h.01M555 160h.01M555 195h.01M555 230h.01M555 265h.01M555 300h.01"
+                      stroke="#4b5879"
+                      stroke-width="2.8"
+                      stroke-linecap="round"
+                      opacity=".55"
+                    ></path>
+                    <path
+                      d="M84 248L280 160 476 248 280 317Z"
+                      fill="#35251e"
+                      stroke="#926b52"
+                    ></path>
+                    <path
+                      class="svg-signal"
+                      d="M95 249H180L226 215H335L387 249H470"
+                      stroke="#ff9b60"
+                      stroke-width="2"
+                      stroke-dasharray="5 10"
+                    ></path>
+                    <g class="svg-plane">
+                      <path
+                        d="M115 150l72 26v80l-72 -26Z"
+                        fill="#4b3528"
+                        stroke="#b38566"
+                      ></path>
+                      <path
+                        d="M187 176l25 -14v80l-25 14Z"
+                        fill="#241b17"
+                        stroke="#926b52"
+                      ></path>
+                      <path
+                        d="M115 150l25 -14 72 26 -25 14Z"
+                        fill="#725039"
+                        stroke="#b38566"
+                      ></path>
+                      <path
+                        d="M127 170l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="173" cy="185" r="2" fill="#ff9b60"></circle>
+                      <path
+                        d="M127 189l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="173" cy="204" r="2" fill="#ff9b60"></circle>
+                      <path
+                        d="M127 208l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="173" cy="223" r="2" fill="#ff9b60"></circle>
+                    </g>
+                    <g class="svg-plane">
+                      <path
+                        d="M225 120l72 26v80l-72 -26Z"
+                        fill="#4b3528"
+                        stroke="#b38566"
+                      ></path>
+                      <path
+                        d="M297 146l25 -14v80l-25 14Z"
+                        fill="#241b17"
+                        stroke="#926b52"
+                      ></path>
+                      <path
+                        d="M225 120l25 -14 72 26 -25 14Z"
+                        fill="#725039"
+                        stroke="#b38566"
+                      ></path>
+                      <path
+                        d="M237 140l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="283" cy="155" r="2" fill="#ff9b60"></circle>
+                      <path
+                        d="M237 159l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="283" cy="174" r="2" fill="#ff9b60"></circle>
+                      <path
+                        d="M237 178l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="283" cy="193" r="2" fill="#ff9b60"></circle>
+                    </g>
+                    <g class="svg-plane">
+                      <path
+                        d="M335 90l72 26v80l-72 -26Z"
+                        fill="#4b3528"
+                        stroke="#b38566"
+                      ></path>
+                      <path
+                        d="M407 116l25 -14v80l-25 14Z"
+                        fill="#241b17"
+                        stroke="#926b52"
+                      ></path>
+                      <path
+                        d="M335 90l25 -14 72 26 -25 14Z"
+                        fill="#725039"
+                        stroke="#b38566"
+                      ></path>
+                      <path
+                        d="M347 110l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="393" cy="125" r="2" fill="#ff9b60"></circle>
+                      <path
+                        d="M347 129l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="393" cy="144" r="2" fill="#ff9b60"></circle>
+                      <path
+                        d="M347 148l45 16"
+                        stroke="#e2b397"
+                        stroke-width="3"
+                      ></path>
+                      <circle cx="393" cy="163" r="2" fill="#ff9b60"></circle>
+                    </g>
+                    <path
+                      d="M280 248l-15 -8v-16l15 -8 15 8v16Z"
+                      fill="#ff9b60"
+                    ></path></svg
+                  ><small>VALIDATION / REPEATABLE EVIDENCE</small>
+                </div>
+              </div>
+              <details class="case-details">
+                <summary>
+                  Read the Cisco story
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </summary>
+                <div
+                  class="validation-flow"
+                  aria-label="Systems validation workflow"
+                >
+                  <div>
+                    <span>01</span><b>Test</b
+                    ><small>Repeatable Python suites</small>
+                  </div>
+                  <div>
+                    <span>02</span><b>Investigate</b
+                    ><small>Reproduce &amp; capture evidence</small>
+                  </div>
+                  <div>
+                    <span>03</span><b>Verify</b
+                    ><small>Check the correction</small>
+                  </div>
+                  <i aria-hidden="true"></i>
+                </div>
+                <div class="technical-points">
+                  <span>Python automation</span><span>Network security</span
+                  ><span>Debugging</span><span>Systems validation</span>
+                </div>
+                <div class="case-columns">
+                  <div>
+                    <h4>Context</h4>
+                    <p>
+                      Enterprise backend and network-security systems across
+                      Cisco FTD / ASA environments.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>My contribution</h4>
+                    <p>
+                      Python automation, testing, defect triage, debugging,
+                      root-cause analysis and systems validation.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>Outcome</h4>
+                    <p>
+                      Reduced manual regression effort by 40% and improved
+                      hardware/test efficiency by approximately 15%.
+                    </p>
+                  </div>
+                </div>
+
+                <p class="detail-content">
+                  Dec 2022–Dec 2023 · Software Engineer, Backend Systems &amp;
+                  Infrastructure. Worked with Python, ASA, FTD, FMC, FCM and
+                  TeraVM, including DHCP-v6 behaviour in VPN environments.
+                </p>
+              </details>
+            </article>
+          </div>
+        </div>
+        <p class="sr-only" id="project-status" aria-live="polite"></p>
+      </section>
+      <div class="kinetic-strip" aria-hidden="true">
+        <div class="kinetic-track">
+          <span
+            >APIs <b>✳</b> RELEASES <b>✳</b> SQL <b>✳</b> AI PRODUCTS
+            <b>✳</b></span
+          ><span
+            >APIs <b>✳</b> RELEASES <b>✳</b> SQL <b>✳</b> AI PRODUCTS
+            <b>✳</b></span
+          >
+        </div>
+      </div>
+      <section class="work-marquee" aria-label="Work in focus">
+        <div class="container marquee-label">
+          <span>Systems. People. Progress.</span
+          ><span>APIs · RBAC · SQL · RAG · releases · RCA</span>
+        </div>
+        <div class="marquee-window" aria-hidden="true">
+          <div class="marquee-row">
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-google"></use></svg
+              ><span>GOOGLE · GLOBAL PROGRAMS</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-tracxn"></use></svg
+              ><span>TRACXN · B2B DELIVERY</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-cisco"></use></svg
+              ><span>CISCO · ENGINEERING</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-google"></use></svg
+              ><span>SCREENGOD · AI PRODUCT</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-tracxn"></use></svg
+              ><span>APIs · RBAC · SQL</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-cisco"></use></svg
+              ><span>RAG · RELEASES · RCA</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-google"></use></svg
+              ><span>GOOGLE · GLOBAL PROGRAMS</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-tracxn"></use></svg
+              ><span>TRACXN · B2B DELIVERY</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-cisco"></use></svg
+              ><span>CISCO · ENGINEERING</span>
+            </div>
+          </div>
+          <div class="marquee-row">
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-cisco"></use></svg
+              ><span>SCREENGOD · AI PRODUCT</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-tracxn"></use></svg
+              ><span>APIs · RBAC · SQL</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-google"></use></svg
+              ><span>RAG · RELEASES · RCA</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-cisco"></use></svg
+              ><span>GOOGLE · GLOBAL PROGRAMS</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-tracxn"></use></svg
+              ><span>TRACXN · B2B DELIVERY</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-google"></use></svg
+              ><span>CISCO · ENGINEERING</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-cisco"></use></svg
+              ><span>SCREENGOD · AI PRODUCT</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-tracxn"></use></svg
+              ><span>APIs · RBAC · SQL</span>
+            </div>
+            <div class="marquee-tile">
+              <svg viewBox="0 0 560 330" aria-hidden="true">
+                <use href="#work-illustration-google"></use></svg
+              ><span>RAG · RELEASES · RCA</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="film-chapter"
+        id="mindset"
+        aria-labelledby="mindset-title"
+      >
+        <div class="film-sticky">
+          <div class="film-floor" aria-hidden="true"></div>
+          <div class="container film-layout">
+            <div class="film-copy">
+              <p class="chapter-label">04 / SYSTEMS → PEOPLE → PROGRESS</p>
+              <h2 id="mindset-title">
+                A system view.<br /><span>A delivery plan.</span>
+              </h2>
+              <p data-scroll-text>
+                At Tracxn, an API permissions issue became a 22-endpoint
+                evidence matrix and a tracked partner escalation.
+              </p>
+              <p>
+                My role is to turn technical detail into decisions, owners and
+                work the team can deliver.
+              </p>
+              <a class="text-link" href="#case-tracxn"
+                >Read the delivery case ↗<span class="arrow" aria-hidden="true"
+                  >↗</span
+                ></a
+              >
+            </div>
+            <div class="film-scene" data-mascot-media aria-hidden="true">
+              <canvas id="signal-canvas"></canvas>
+              <img class="section-mascot" src="assets/mascot-cutout.webp" data-idle="assets/mascot-idle.webp" data-hello="assets/mascot-hello.webp" width="400" height="492" alt="" loading="lazy" />
+              <div class="scene-orbit orbit-one"></div>
+              <div class="scene-orbit orbit-two"></div>
+              <span class="film-index">01—03</span>
+              <span class="film-caption">Understand the system.</span>
+            </div>
+          </div>
+          <div class="film-rail container" aria-hidden="true">
+            <span>01 / Understand</span><span>02 / Align</span
+            ><span>03 / Deliver</span><i></i>
+          </div>
+        </div>
+      </section>
+      <section class="approach" id="approach" aria-labelledby="approach-title">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Core Competencies</h2>
-                <p class="section-subtitle">Comprehensive skill set spanning project management, technical expertise, and strategic leadership</p>
+          <p class="approach-kicker">05 / DELIVERY PRACTICE</p>
+          <h2 class="approach-heading" id="approach-title">
+            From requirements<em>to release.</em>
+          </h2>
+          <div class="approach-story">
+            <div class="approach-visual" aria-hidden="true">
+              <div class="system-scene">
+                <svg
+                  class="system-art"
+                  viewBox="0 0 560 460"
+                  fill="none"
+                  focusable="false"
+                >
+                  <defs>
+                    <linearGradient
+                      id="plane-fill"
+                      x1="280"
+                      y1="138"
+                      x2="280"
+                      y2="370"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#c1dca7" stop-opacity=".18"></stop>
+                      <stop
+                        offset="1"
+                        stop-color="#c1dca7"
+                        stop-opacity=".02"
+                      ></stop>
+                    </linearGradient>
+                  </defs>
+                  <g
+                    class="system-orbits"
+                    stroke="#769c72"
+                    stroke-opacity=".32"
+                  >
+                    <ellipse cx="280" cy="255" rx="236" ry="122"></ellipse>
+                    <ellipse cx="280" cy="255" rx="197" ry="100"></ellipse>
+                    <path
+                      d="M44 255H516M280 133V377"
+                      stroke-dasharray="3 7"
+                    ></path>
+                  </g>
+                  <g
+                    class="signal-branches"
+                    stroke="#c1dca7"
+                    stroke-width="1.5"
+                  >
+                    <path
+                      class="signal-path"
+                      pathLength="1"
+                      d="M64 220L152 220L203 252H280"
+                    ></path>
+                    <path
+                      class="signal-path"
+                      pathLength="1"
+                      d="M105 316H176L229 282H280"
+                    ></path>
+                    <path
+                      class="signal-path"
+                      pathLength="1"
+                      d="M160 133L203 158V201L247 226H280"
+                    ></path>
+                    <circle cx="64" cy="220" r="6" fill="#c1dca7"></circle>
+                    <circle cx="105" cy="316" r="6" fill="#c1dca7"></circle>
+                    <circle cx="160" cy="133" r="6" fill="#c1dca7"></circle>
+                  </g>
+                  <g
+                    class="system-planes"
+                    stroke="#a6c78d"
+                    stroke-width="1.5"
+                    fill="url(#plane-fill)"
+                  >
+                    <g class="system-plane plane-bottom">
+                      <path d="M280 206L396 273L280 340L164 273Z"></path>
+                      <path
+                        d="M164 273V286L280 353L396 286V273M280 340V353"
+                      ></path>
+                    </g>
+                    <g class="system-plane plane-middle">
+                      <path d="M280 165L396 232L280 299L164 232Z"></path>
+                      <path
+                        d="M164 232V245L280 312L396 245V232M280 299V312"
+                      ></path>
+                    </g>
+                    <g class="system-plane plane-top">
+                      <path d="M280 124L396 191L280 258L164 191Z"></path>
+                      <path
+                        d="M164 191V204L280 271L396 204V191M280 258V271"
+                      ></path>
+                      <path
+                        d="M280 155L340 190L280 225L220 190Z"
+                        fill="#c1dca7"
+                        fill-opacity=".14"
+                      ></path>
+                      <path
+                        d="M264 190L276 197L299 183"
+                        stroke="#e5f2d8"
+                        stroke-width="3"
+                      ></path>
+                    </g>
+                  </g>
+                  <g class="outcome-signal" stroke="#c1dca7" stroke-width="1.5">
+                    <path
+                      class="outcome-path"
+                      pathLength="1"
+                      d="M396 232H438L482 205"
+                    ></path>
+                    <circle
+                      class="outcome-dot"
+                      cx="482"
+                      cy="205"
+                      r="10"
+                      fill="#c1dca7"
+                    ></circle>
+                    <circle
+                      class="outcome-ring"
+                      cx="482"
+                      cy="205"
+                      r="21"
+                    ></circle>
+                  </g>
+                </svg>
+              </div>
+              <div class="scene-caption">
+                <span class="scene-count">03 / 03</span>
+                <span class="scene-label">Deliver the outcome.</span>
+              </div>
+              <div class="story-track"><span></span></div>
+              <p class="scene-hint">
+                SCROLL TO CONNECT THE PIECES <span>↓</span>
+              </p>
             </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                        <h3 class="skill-title">Project Management</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Project Planning</span>
-                        <span class="skill-tag">Project Engineering</span>
-                        <span class="skill-tag">Software Project Management</span>
-                        <span class="skill-tag">Technical Program Management</span>
-                        <span class="skill-tag">Agile Methodologies</span>
-                        <span class="skill-tag">SDLC</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3 class="skill-title">Process Excellence</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Process Improvement</span>
-                        <span class="skill-tag">Process Re-engineering (BPR)</span>
-                        <span class="skill-tag">Operational Excellence</span>
-                        <span class="skill-tag">Root Cause Analysis (RCA)</span>
-                        <span class="skill-tag">AHT/TAT Optimization</span>
-                        <span class="skill-tag">Six Sigma</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 class="skill-title">Financial & Strategic</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Financial Governance</span>
-                        <span class="skill-tag">OPEX Management</span>
-                        <span class="skill-tag">Vendor Strategy</span>
-                        <span class="skill-tag">Data Analysis</span>
-                        <span class="skill-tag">Executive Reporting</span>
-                        <span class="skill-tag">TCO Analysis</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3 class="skill-title">Leadership & Collaboration</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Cross-Functional Leadership</span>
-                        <span class="skill-tag">Stakeholder Management</span>
-                        <span class="skill-tag">Team Development</span>
-                        <span class="skill-tag">Strategic Planning</span>
-                        <span class="skill-tag">Change Management</span>
-                        <span class="skill-tag">Vendor Relations</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3 class="skill-title">Technology & Innovation</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Cloud Computing</span>
-                        <span class="skill-tag">Generative AI Strategy</span>
-                        <span class="skill-tag">Python Programming</span>
-                        <span class="skill-tag">ReactJS</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">GoLang</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 class="skill-title">Security & Compliance</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Security Evaluation</span>
-                        <span class="skill-tag">Compliance Management</span>
-                        <span class="skill-tag">Risk Assessment</span>
-                        <span class="skill-tag">Audit Preparation</span>
-                        <span class="skill-tag">Policy Development</span>
-                        <span class="skill-tag">Network Security</span>
-                    </div>
-                </div>
+            <div class="approach-flow">
+              <div class="approach-step" data-motion-card data-story-step="0">
+                <span class="step-number">01</span>
+                <h3>Trace the dependency</h3>
+                <p>
+                  Map APIs, access rules and data flows. Turn issues into
+                  reproducible evidence and an actionable escalation.
+                </p>
+              </div>
+              <div class="approach-step" data-motion-card data-story-step="1">
+                <span class="step-number">02</span>
+                <h3>Plan with clear ownership</h3>
+                <p>
+                  Define milestones, scope, owners and testing criteria. Keep
+                  risks and dependencies visible through Jira, RAID tracking and
+                  stakeholder updates.
+                </p>
+              </div>
+              <div class="approach-step" data-motion-card data-story-step="2">
+                <span class="step-number">03</span>
+                <h3>Release, measure, improve</h3>
+                <p>
+                  Coordinate testing and release readiness. Review dashboards,
+                  incidents and product telemetry to decide the next corrective
+                  action.
+                </p>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="section certifications">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Certifications & Learning</h2>
-                <p class="section-subtitle">Continuous learning and professional development across multiple domains</p>
-            </div>
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fab fa-google"></i>
-                    </div>
-                    <h3 class="cert-title">Google Project Management</h3>
-                    <p class="cert-issuer">Google Career Certificate</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="cert-title">PMI Practical Application of Generative AI for Project Managers</h3>
-                    <p class="cert-issuer">Project Management Institute</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fab fa-microsoft"></i>
-                    </div>
-                    <h3 class="cert-title">Microsoft Azure Fundamentals</h3>
-                    <p class="cert-issuer">Microsoft Azure</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <h3 class="cert-title">Cisco CCNA</h3>
-                    <p class="cert-issuer">Cisco Networking Academy</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3 class="cert-title">McKinsey Forward</h3>
-                    <p class="cert-issuer">McKinsey & Company</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="cert-title">Wharton Marketing</h3>
-                    <p class="cert-issuer">Wharton Business School</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3 class="cert-title">Six Sigma White Belt</h3>
-                    <p class="cert-issuer">Six Sigma Institute</p>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-vial"></i>
-                    </div>
-                    <h3 class="cert-title">Test and Monitor Applications</h3>
-                    <p class="cert-issuer">Non-functional & API Testing</p>
-                </div>
-            </div>
+      </section>
+      <section class="container about" id="about" aria-labelledby="about-title">
+        <div class="experience-head">
+          <p class="chapter-label">06 / THE FOUNDATION</p>
+          <h2 id="about-title">Experience.</h2>
+          <p>
+            Technical delivery, program governance and an engineering
+            foundation.
+          </p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="section-subtitle">Open to discussing challenges in program management and operational excellence</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3 class="contact-title">Email</h3>
-                    <p class="contact-text">Let's discuss opportunities</p>
-                    <a href="mailto:omkargochhayat@gmail.com" class="contact-link">omkargochhayat@gmail.com</a>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                    <h3 class="contact-title">LinkedIn</h3>
-                    <p class="contact-text">Connect professionally</p>
-                    <a href="https://www.linkedin.com/in/omkar-gochhayat" target="_blank" class="contact-link">linkedin.com/in/omkar-gochhayat</a>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3 class="contact-title">Location</h3>
-                    <p class="contact-text">Based in India</p>
-                    <span class="contact-link">Hyderabad, Telangana</span>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3 class="contact-title">Current Role</h3>
-                    <p class="contact-text">Leading projects at scale</p>
-                    <span class="contact-link">Project Manager @Google</span>
-                </div>
-            </div>
+        <div class="timeline" aria-label="Selected experience">
+          <article class="timeline-item" data-motion-card>
+            <p class="date">May–Aug 2026</p>
+            <h3 translate="no">Tracxn</h3>
+            <p class="job">Technical Program Manager</p>
+            <p class="job-description">
+              B2B SaaS &amp; Technical Delivery · 15 workstreams and 40+
+              releases.
+            </p>
+          </article>
+          <article class="timeline-item" data-motion-card>
+            <p class="date">Mar 2024–Mar 2026</p>
+            <h3 translate="no">Google Play</h3>
+            <p class="job">Technical Project Manager</p>
+            <p class="job-description">
+              Strategic Programs &amp; Operations · global program governance
+              and SQL / PLX reporting.
+            </p>
+          </article>
+          <article class="timeline-item" data-motion-card>
+            <p class="date">Dec 2022–Dec 2023</p>
+            <h3 translate="no">Cisco</h3>
+            <p class="job">Software Engineer</p>
+            <p class="job-description">
+              Backend Systems &amp; Infrastructure · Python automation,
+              debugging and validation.
+            </p>
+          </article>
+          <article class="timeline-item" data-motion-card>
+            <p class="date">Aug 2021–Nov 2022</p>
+            <h3 translate="no">SimpleeKare / Independent Development</h3>
+            <p class="job">Software Engineering Intern</p>
+            <p class="job-description">
+              Healthtech Product Delivery · ReactJS / Python workflows,
+              implementation and testing.
+            </p>
+          </article>
         </div>
-    </section>
-
-    <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let followerX = 0, followerY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.3;
-            cursorY += (mouseY - cursorY) * 0.3;
-            followerX += (mouseX - followerX) * 0.1;
-            followerY += (mouseY - followerY) * 0.1;
-
-            cursor.style.transform = `translate3d(${cursorX - 10}px, ${cursorY - 10}px, 0)`;
-            cursorFollower.style.transform = `translate3d(${followerX - 20}px, ${followerY - 20}px, 0)`;
-
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Hide cursor on mobile
-        if (window.innerWidth <= 768) {
-            cursor.style.display = 'none';
-            cursorFollower.style.display = 'none';
-        }
-
-        // Navigation
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        const navLinks = document.querySelectorAll('.nav-links a');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = navToggle.querySelector('i');
-            
-            if (navMenu.classList.contains('active')) {
-                icon.className = 'fas fa-times';
-                document.body.style.overflow = 'hidden';
-            } else {
-                icon.className = 'fas fa-bars';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                navMenu.classList.remove('active');
-                navToggle.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = 'auto';
-                
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.classList.add('hidden');
-                initAnimations();
-            }, 2500);
-        });
-
-        // Scroll Animations
-        function initAnimations() {
-            // Hero animations
-            anime({
-                targets: '.hero-badge',
-                opacity: [0, 1],
-                translateY: [30, 0],
-                duration: 800,
-                delay: 300,
-                easing: 'easeOutExpo'
-            });
-
-            anime({
-                targets: '.hero-title',
-                opacity: [0, 1],
-                translateY: [50, 0],
-                duration: 1000,
-                delay: 500,
-                easing: 'easeOutExpo'
-            });
-
-            anime({
-                targets: '.hero-subtitle',
-                opacity: [0, 1],
-                translateY: [30, 0],
-                duration: 800,
-                delay: 700,
-                easing: 'easeOutExpo'
-            });
-
-            anime({
-                targets: '.hero-description',
-                opacity: [0, 1],
-                translateY: [30, 0],
-                duration: 800,
-                delay: 900,
-                easing: 'easeOutExpo'
-            });
-
-            anime({
-                targets: '.hero-cta',
-                opacity: [0, 1],
-                translateY: [30, 0],
-                duration: 800,
-                delay: 1100,
-                easing: 'easeOutExpo'
-            });
-
-            // Intersection Observer
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (entry.target.classList.contains('timeline-item')) {
-                            animateTimelineItem(entry.target);
-                        } else if (entry.target.classList.contains('skill-category')) {
-                            animateSkillCategory(entry.target);
-                        } else if (entry.target.classList.contains('cert-card')) {
-                            animateCertCard(entry.target);
-                        } else if (entry.target.classList.contains('contact-card')) {
-                            animateContactCard(entry.target);
-                        } else if (entry.target.classList.contains('about-grid')) {
-                            animateAboutGrid(entry.target);
-                        } else if (entry.target.classList.contains('stat-item')) {
-                            animateStatItem(entry.target);
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            // Observe elements
-            document.querySelectorAll('.timeline-item, .skill-category, .cert-card, .contact-card, .about-grid, .stat-item').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        function animateAboutGrid(grid) {
-            const visual = grid.querySelector('.about-visual');
-            const content = grid.querySelector('.about-content');
-
-            anime({
-                targets: visual,
-                opacity: [0, 1],
-                translateX: [-50, 0],
-                duration: 800,
-                easing: 'easeOutExpo'
-            });
-
-            anime({
-                targets: content,
-                opacity: [0, 1],
-                translateX: [50, 0],
-                duration: 800,
-                delay: 200,
-                easing: 'easeOutExpo'
-            });
-        }
-
-        function animateStatItem(item) {
-            const number = item.querySelector('.stat-number');
-            
-            anime({
-                targets: item,
-                opacity: [0, 1],
-                scale: [0.8, 1],
-                duration: 600,
-                easing: 'easeOutExpo'
-            });
-
-            // Animate number counting
-            const finalValue = parseInt(number.textContent);
-            const obj = { value: 0 };
-            
-            anime({
-                targets: obj,
-                value: finalValue,
-                duration: 1000,
-                delay: 300,
-                easing: 'easeOutExpo',
-                update: function() {
-                    if (number.textContent.includes('%')) {
-                        number.textContent = Math.round(obj.value) + '%';
-                    } else if (number.textContent.includes('+')) {
-                        number.textContent = Math.round(obj.value) + '+';
-                    } else {
-                        number.textContent = Math.round(obj.value);
-                    }
-                }
-            });
-        }
-
-        function animateTimelineItem(item) {
-            anime({
-                targets: item,
-                opacity: [0, 1],
-                translateY: [50, 0],
-                duration: 800,
-                easing: 'easeOutExpo'
-            });
-        }
-
-        function animateSkillCategory(category) {
-            anime({
-                targets: category,
-                opacity: [0, 1],
-                translateY: [50, 0],
-                duration: 600,
-                easing: 'easeOutExpo'
-            });
-
-            const tags = category.querySelectorAll('.skill-tag');
-            anime({
-                targets: tags,
-                opacity: [0, 1],
-                scale: [0.8, 1],
-                duration: 400,
-                delay: anime.stagger(100, {start: 300}),
-                easing: 'easeOutExpo'
-            });
-        }
-
-        function animateCertCard(card) {
-            anime({
-                targets: card,
-                opacity: [0, 1],
-                translateY: [50, 0],
-                duration: 600,
-                easing: 'easeOutExpo'
-            });
-        }
-
-        function animateContactCard(card) {
-            anime({
-                targets: card,
-                opacity: [0, 1],
-                translateY: [50, 0],
-                scale: [0.9, 1],
-                duration: 600,
-                easing: 'easeOutExpo'
-            });
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Interactive hover effects
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                anime({
-                    targets: btn,
-                    scale: 1.05,
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-
-            btn.addEventListener('mouseleave', () => {
-                anime({
-                    targets: btn,
-                    scale: 1,
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-        });
-
-        // Card hover effects
-        document.querySelectorAll('.timeline-content, .skill-category, .cert-card, .contact-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                anime({
-                    targets: card,
-                    scale: 1.02,
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                anime({
-                    targets: card,
-                    scale: 1,
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-        });
-
-        // Glitch effect on hero title hover
-        const heroTitle = document.querySelector('.hero-title');
-        let glitchTimeout;
-
-        heroTitle.addEventListener('mouseenter', () => {
-            heroTitle.style.animation = 'glitch-1 0.3s infinite';
-            clearTimeout(glitchTimeout);
-            glitchTimeout = setTimeout(() => {
-                heroTitle.style.animation = 'none';
-            }, 1000);
-        });
-
-        // Parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.floating-shapes .shape');
-            const speed = 0.5;
-
-            parallax.forEach((shape, index) => {
-                const yPos = -(scrolled * speed * (index + 1) * 0.2);
-                shape.style.transform = `translate3d(0, ${yPos}px, 0) rotate(${scrolled * 0.1}deg)`;
-            });
-        });
-
-        // Typing effect for code simulation
-        function startCodeSimulation() {
-            const codeLines = document.querySelectorAll('.code-line');
-            const texts = [
-                'class ProjectManager {',
-                '  expertise: "Google + Cisco"',
-                '  impact: "33% AHT reduction"',
-                '  skills: ["PM", "AI", "Cloud"]',
-                '}'
-            ];
-
-            codeLines.forEach((line, index) => {
-                const text = texts[index];
-                let charIndex = 0;
-                line.textContent = '';
-                
-                setTimeout(() => {
-                    const typeInterval = setInterval(() => {
-                        if (charIndex < text.length) {
-                            line.textContent += text[charIndex];
-                            charIndex++;
-                        } else {
-                            clearInterval(typeInterval);
-                        }
-                    }, 50);
-                }, index * 800);
-            });
-        }
-
-        // Start code simulation when about section comes into view
-        const aboutObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(startCodeSimulation, 500);
-                    aboutObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        aboutObserver.observe(document.querySelector('.about-visual'));
-
-        // Magnetic effect for buttons
-        document.querySelectorAll('.btn, .nav-toggle').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-            });
-
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0px, 0px)';
-            });
-        });
-
-        // Add scroll progress indicator
-        const scrollProgress = document.createElement('div');
-        scrollProgress.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, #00ff88, #0080ff, #ff0080);
-            z-index: 9999;
-            transition: width 0.1s ease;
-        `;
-        document.body.appendChild(scrollProgress);
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.offsetHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
-
-        // Add Easter egg - Konami code
-        let konamiCode = [];
-        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
-
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.keyCode);
-            if (konamiCode.length > konamiSequence.length) {
-                konamiCode.shift();
-            }
-            
-            if (konamiCode.join(',') === konamiSequence.join(',')) {
-                // Easter egg activated!
-                const heroTitle = document.querySelector('.hero-title');
-                heroTitle.style.animation = 'glitch-1 0.5s infinite';
-                
-                // Create party effect
-                for (let i = 0; i < 50; i++) {
-                    createParticle();
-                }
-                
-                setTimeout(() => {
-                    heroTitle.style.animation = 'none';
-                }, 3000);
-                
-                konamiCode = [];
-            }
-        });
-
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: fixed;
-                width: 10px;
-                height: 10px;
-                background: ${['#00ff88', '#ff0080', '#0080ff'][Math.floor(Math.random() * 3)]};
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                left: ${Math.random() * 100}vw;
-                top: ${Math.random() * 100}vh;
-                animation: particleFall 3s ease-out forwards;
-            `;
-            
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 3000);
-        }
-
-        // Add particle animation to CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes particleFall {
-                0% {
-                    transform: translateY(-100vh) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(100vh) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Performance optimization
-        let ticking = false;
-
-        function updateAnimations() {
-            // Throttle animations
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    // Update any scroll-based animations here
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }
-
-        window.addEventListener('scroll', updateAnimations);
-
-        // Responsive adjustments
-        function handleResize() {
-            if (window.innerWidth <= 768) {
-                cursor.style.display = 'none';
-                cursorFollower.style.display = 'none';
-            } else {
-                cursor.style.display = 'block';
-                cursorFollower.style.display = 'block';
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-        
-        // Initialize
-        handleResize();
-    </script>
-</body>
+        <div class="about-footer">
+          <p>B.Tech CSE · KIST, Bhubaneswar · GPA 8.15 / 10</p>
+          <button class="print-button" id="print" hidden>
+            Print profile <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </section>
+      <section
+        class="container contact reveal"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div class="contact-top">
+          <div class="contact-copy">
+            <p class="chapter-label">07 / WHAT’S NEXT</p>
+            <h2 id="contact-title">
+              <span>Let’s talk</span><span>about the work.</span>
+            </h2>
+            <p class="contact-info">
+              Bhubaneswar, India.<br /><span
+                >Open to remote roles<br />and collaboration.</span
+              >
+            </p>
+          </div>
+          <div class="contact-character" data-mascot-media aria-hidden="true">
+            <canvas id="contact-canvas"></canvas>
+            <img class="section-mascot" src="assets/mascot-cutout.webp" data-idle="assets/mascot-idle.webp" data-hello="assets/mascot-hello.webp" width="400" height="492" alt="" loading="lazy" />
+          </div>
+        </div>
+        <div class="contact-actions">
+          <a
+            class="button"
+            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=omkargochhayat%40gmail.com&amp;su=Connecting%20with%20Omkar"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Email via Gmail <span class="arrow" aria-hidden="true">↗</span></a
+          ><a
+            class="button button-secondary"
+            href="https://www.linkedin.com/in/omkar-gochhayat/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Connect on LinkedIn
+            <span class="arrow" aria-hidden="true">↗</span></a
+          ><a
+            class="text-link"
+            href="https://drive.google.com/file/d/1veucMrrtlHZ9i6QxWsc1Zz96Lh6JaxC3/view"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View résumé <span class="arrow" aria-hidden="true">↗</span></a
+          ><button class="copy-button" id="copy-email" hidden>
+            Copy email address
+          </button>
+        </div>
+        <p class="copy-status" id="copy-status" role="status"></p>
+        <p class="contact-note">
+          omkargochhayat@gmail.com · Prefer your email app?
+          <a href="mailto:omkargochhayat@gmail.com">Open email app ↗</a>
+        </p>
+      </section>
+    </main>
+    <footer class="container footer">
+      <a href="#main" translate="no">Omkar Gochhayat</a>
+      <div class="footer-links">
+        <a
+          href="https://github.com/Omkar142"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub ↗</a
+        ><a
+          href="https://www.linkedin.com/in/omkar-gochhayat/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn ↗</a
+        >
+      </div>
+    </footer>
+  </body>
 </html>

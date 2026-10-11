@@ -1,0 +1,41 @@
+{
+  "mascot-cutout.webp": {
+    "bytes": 26096,
+    "frames": 1,
+    "width": 400,
+    "height": 492,
+    "duration_ms": 0,
+    "loop": 1,
+    "transparent_borders": "all frames verified",
+    "sha256": "628c89a5a6fa5e58fb47cd545e73bb4b21e4e5bcc81249527d5aadb52345ffed"
+  },
+  "mascot-idle.webp": {
+    "bytes": 1692784,
+    "frames": 93,
+    "width": 400,
+    "height": 492,
+    "duration_ms": 3948,
+    "loop": 0,
+    "transparent_borders": "all frames verified",
+    "sha256": "866d98ceeb0b97839c5d6f7f83dd978ca244901e5c32fb57a56eb0d749435355"
+  },
+  "mascot-hello.webp": {
+    "bytes": 1936248,
+    "frames": 107,
+    "width": 400,
+    "height": 492,
+    "duration_ms": 4536,
+    "loop": 1,
+    "transparent_borders": "all frames verified",
+    "sha256": "cf42e5ae0e2c6b950e0e734edb65ce43ca5bf47b25fd508506e5a0d619396036"
+  },
+  "processing": {
+    "source": "user-supplied gemini_generated_video_f336b804.mp4",
+    "character_crop": "560x688 at x400 y8, segmented offline, resized to 400x492",
+    "idle": "6.3\u20138.3 seconds, forward and reverse interior frames",
+    "greeting": "1.8\u20136.3 seconds, complete hand raise/wave/return; on portrait arrival, periodic idle and visitor interaction; replay uses fresh object URL from cached bytes",
+    "original": "unchanged",
+    "source_background_and_corner_mark": "excluded from displayed transparent character",
+    "atmosphere": "7-second loop cropped to 960x468; corner mark excluded from displayed background"
+  }
+}
