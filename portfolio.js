@@ -143,6 +143,31 @@
   const choices = [...document.querySelectorAll("[data-project]")];
   const panels = [...document.querySelectorAll(".case-study")];
   document.querySelector(".project-choices").hidden = false;
+  function scrollToProject(target) {
+    if (!target) return;
+    const stage = target.closest(".project-stage");
+    const stacked = stage?.classList.contains("stack-ready");
+    let top;
+    // Sticky/scaled cards report their pinned screen position. Measure the
+    // normal-flow destination, then restore the stack before the next paint.
+    try {
+      if (stacked) stage.classList.remove("stack-ready");
+      const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+      const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+      top = Math.max(
+        0,
+        target.getBoundingClientRect().top + window.scrollY - padding - margin,
+      );
+    } finally {
+      if (stacked) stage.classList.add("stack-ready");
+    }
+    if (Math.abs(window.scrollY - top) < 1) return;
+    window.scrollTo({
+      top,
+      left: window.scrollX,
+      behavior: motionOff() ? "instant" : "smooth",
+    });
+  }
   function selectProject(project, updateURL = false, animate = true) {
     if (!choices.some((choice) => choice.dataset.project === project))
       project = "google";
@@ -170,10 +195,7 @@
       url.hash = "case-" + project;
       history.replaceState(null, "", url);
       const target = panels.find((panel) => panel.id === "case-" + project);
-      target?.scrollIntoView({
-        behavior: motionOff() ? "instant" : "smooth",
-        block: "start",
-      });
+      scrollToProject(target);
     }
   }
   function projectFromURL() {
@@ -190,6 +212,20 @@
       selectProject(choice.dataset.project, true),
     ),
   );
+  document.querySelectorAll('a[href^="#case-"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (
+        event.defaultPrevented || event.button !== 0 || event.metaKey ||
+        event.ctrlKey || event.shiftKey || event.altKey
+      ) return;
+      const choice = choices.find(
+        (item) => link.hash === "#case-" + item.dataset.project,
+      );
+      if (!choice) return;
+      event.preventDefault();
+      selectProject(choice.dataset.project, true);
+    });
+  });
   window.addEventListener("popstate", () =>
     selectProject(projectFromURL(), false),
   );
@@ -200,10 +236,7 @@
         (choice) => location.hash === "#case-" + choice.dataset.project,
       )
     )
-      document.querySelector(location.hash)?.scrollIntoView({
-        behavior: motionOff() ? "instant" : "smooth",
-        block: "start",
-      });
+      scrollToProject(panels.find((panel) => "#" + panel.id === location.hash));
   });
 
   if ("IntersectionObserver" in window) {
