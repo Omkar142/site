@@ -71,10 +71,16 @@ const stage = {
 };
 const scrolls = [];
 let off = false;
-context.root = {};
+let compact = false;
+let navigationTop = 65, navigationHeight = 168;
+const companyChoices = { getBoundingClientRect: () => ({ height: navigationHeight }) };
+context.root = { classList: { contains: (name) => name === "compact" && compact } };
+context.document.querySelector = (selector) => selector === ".project-choices" ? companyChoices : status;
 context.getComputedStyle = (element) => element === context.root
   ? { scrollPaddingTop: "96px" }
-  : { scrollMarginTop: "118px" };
+  : element === companyChoices
+    ? { top: navigationTop + "px" }
+    : { scrollMarginTop: "118px" };
 context.window = {
   scrollY: 3800,
   scrollX: 0,
@@ -152,3 +158,21 @@ context.window.events.hashchange();
 assert.equal(scrolls.at(-1).top, 1786);
 assert.equal(choices[1]["aria-pressed"], "true");
 console.log("PASS: pinned-card back-navigation, repeat/rapid selection, preserved stack, motion-off fallback, dynamic case links and single-scroll fragment navigation");
+
+compact = true;
+classes.delete("stack-ready");
+context.selectProject("tracxn", true);
+assert.equal(scrolls.at(-1).top, 1755, "Mobile story headings clear both the header and two-row company selector");
+assert.ok(!classes.has("stack-ready"));
+navigationTop = 98;
+navigationHeight = 205;
+context.selectProject("google", true);
+assert.equal(scrolls.at(-1).top, 685, "Larger mobile navigation/text sizes receive measured clearance");
+off = true;
+context.selectProject("cisco", true);
+assert.equal(scrolls.at(-1).top, 3685);
+assert.equal(scrolls.at(-1).behavior, "instant");
+compact = false;
+context.selectProject("google", true);
+assert.equal(scrolls.at(-1).top, 786, "Desktop keeps its existing landing position");
+console.log("PASS: persistent mobile selector clearance, resized navigation, motion-off selection and unchanged desktop offsets");

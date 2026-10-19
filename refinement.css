@@ -1145,6 +1145,12 @@ html.handheld-wide {
 }
 .compact .project-choices {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: sticky;
+  top: var(--work-header-height, calc(4rem + 1px));
+  z-index: 10;
+  padding-block: 0.5rem;
+  background: #0c0c0c;
+  border-bottom: 1px solid #35383e;
 }
 .compact .impact-metrics {
   grid-template-columns: 1fr;

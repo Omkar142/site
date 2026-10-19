@@ -143,6 +143,19 @@
   const choices = [...document.querySelectorAll("[data-project]")];
   const panels = [...document.querySelectorAll(".case-study")];
   document.querySelector(".project-choices").hidden = false;
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    const syncWorkHeader = () => root.style.setProperty(
+      "--work-header-height",
+      Math.ceil(siteHeader.getBoundingClientRect().height) + "px",
+    );
+    syncWorkHeader();
+    window.addEventListener("resize", syncWorkHeader, { passive: true });
+    window.addEventListener("omkar:layout", syncWorkHeader);
+    if ("ResizeObserver" in window)
+      new ResizeObserver(syncWorkHeader).observe(siteHeader);
+    if (document.fonts) document.fonts.ready.then(syncWorkHeader);
+  }
   function scrollToProject(target) {
     if (!target) return;
     const stage = target.closest(".project-stage");
@@ -154,9 +167,18 @@
       if (stacked) stage.classList.remove("stack-ready");
       const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
       const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+      let clearance = padding + margin;
+      const companyChoices = document.querySelector(".project-choices");
+      if (root.classList.contains("compact") && companyChoices) {
+        const pinnedTop = parseFloat(getComputedStyle(companyChoices).top) || 0;
+        clearance = Math.max(
+          clearance,
+          pinnedTop + companyChoices.getBoundingClientRect().height + 12,
+        );
+      }
       top = Math.max(
         0,
-        target.getBoundingClientRect().top + window.scrollY - padding - margin,
+        target.getBoundingClientRect().top + window.scrollY - clearance,
       );
     } finally {
       if (stacked) stage.classList.add("stack-ready");
