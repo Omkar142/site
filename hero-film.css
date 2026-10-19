@@ -92,6 +92,10 @@
 .hero h1.hero-wordmark { top: 65px; font-size: clamp(6rem, 19vw, 20rem); }
 /* The source hand opens to viewer-left; mirror only the artwork, never the text. */
 [data-hero-film] .hero-art, [data-hero-film] .mascot-sequence { transform: scaleX(-1); }
+/* Compact layout puts the experience panel on viewer-left. Keep every
+   character pose facing that panel; the desktop artwork stays mirrored. */
+.compact [data-hero-film] .hero-art,
+.compact [data-hero-film] .mascot-sequence { transform: scaleX(1); }
 .hero-copy { bottom: 40px; padding: 0; width: 28%; max-width: 330px; }
 .hero-actions { position: static; inset: auto; width: 100%; justify-content: flex-start; margin-top: 22px; gap: 12px; }
 .hero-actions .button { width: min(230px, 100%); }
